@@ -150,7 +150,7 @@ class Participant(Human):
 # Counselor #
 #############
 
-class counselor(Human):
+class Counselor(Human):
     """
     This class represents a counselor in the Mathecamp.
     """
@@ -188,3 +188,43 @@ class counselor(Human):
                  phoneNumbers, street, streetNumber, postalCode, place, arrivalTime,
                  arrivalType, departureTime, departureType, foodRestrictions, miscellaneous, room)
         self.preferredGrades= preferredGrades
+
+#########
+# Guest #
+#########
+
+class Guest(Human):
+    """
+    This class represents a guest at the Mathecamp who may or may not stay there for a night.
+    """
+
+    occupation = Occupation.GUEST
+
+    def __init__(self, id=0, family_name="", given_name="", birthDate=date.min, emailAddresses=[], gender=None,
+                 phoneNumbers=[], street="", streetNumber="", postalCode="", place="",
+                 arrivalTime=None, arrivalType=None, departureTime=None, departureType=None, foodRestrictions=[],
+                 miscellaneous="", room=None):
+        """
+        Basic constructor for guests
+        :param id: Unique id per Person in the whole mathecamp
+        :param family_name: Guests family name
+        :param given_name: Guests given name
+        :param birthDate: Guests birthDate as a python3 datetime.date value
+        :param emailAddresses: a list of stings of email addresses of the Guest
+        :param gender: the Guests gender as an enum of type Gender
+        :param phoneNumbers: a list of strings giving the Guests phone numbers
+        :param street: the Guests street as a string
+        :param streetNumber: the Guests street number as a string
+        :param postalCode: the Guests postal code as a string
+        :param place: the Guests city as a string
+        :param arrivalTime: the Guests arrival time at the Mathecamp as a datetime.time
+        :param arrivalType: the Guests arrival type as an enum of type TransportType
+        :param departureTime: the Guests departure time at the Mathecamp as a datetime.time
+        :param departureType: the Guests departure type as an enum of type TransportType
+        :param foodRestrictions: a list of enums of type FoodRestriction of the Guest
+        :param miscellaneous: a string for miscellaneous information
+        :param room: the Guests room as the id (i.e. an integer) of the corresponding room
+        """
+        Human.__init__(self, id, family_name, given_name, birthDate, gender, emailAddresses,
+                       phoneNumbers, street, streetNumber, postalCode, place, arrivalTime,
+                       arrivalType, departureTime, departureType, foodRestrictions, miscellaneous, room)

@@ -7,6 +7,8 @@
 from datetime import *
 from enum import Enum
 
+# <editor-fold desc="Enums">
+
 #########
 # Enums #
 #########
@@ -40,7 +42,8 @@ class Equipment(Enum):
     BLACKBOARD = 2
     WHITEBOARD = 3
     CANVAS = 4
-        
+# </editor-fold>
+
 ##########
 # Circle #
 ##########
@@ -121,22 +124,23 @@ class SpaceTimeSlot:
         self.timeSlot = [self.beginning, self.end]
         self.room = ""
 
+# <editor-fold desc="Room types">
+
 #########
 # Rooms #
 #########
+
 
 class Room:
     """
     This class represents a general room at Violau
     """
 
-    def __init__(self, id, name):
+    def __init__(self, name):
         """
         The main constructor of a room
-        :param id: the id of the room as an integer
         :param name: The name of the room as a string
         """
-        self.id = id
         self.name = name
 
 
@@ -145,13 +149,13 @@ class GeneralRoom(Room):
     This class represents a general room for everybodys usage
     """
 
-    def __init__(self, id, name, equipment):
+    def __init__(self, name, equipment):
         """
         The main constructor of a general room
         :param name: the name of the room as a string
         :param equipment: the equipment available in this room as an enum of type Equipment
         """
-        Room.__init__(self, id, name)
+        Room.__init__(self, name)
         self.equipment = equipment
 
 class PrivateRoom(Room):
@@ -159,13 +163,18 @@ class PrivateRoom(Room):
     This class represents a private room for sleeping
     """
 
-    def __init__(self, id, name="", capacity=0, inhabitants=[], bedtime=date.max):
+    def __init__(self, name="", capacity=0, inhabitants=[], bedtime=time.max, reservedForCounselors = false):
         """
         The main constructor of a private room
         :param name: the name of the room as a string
-        :param equipment: the equipment available in this room as an enum of type Equipment
+        :param capacity: an integer describing how many people can sleep in this room
+        :param inhabitants: a list of ids of humans that stay in this room
+        :param bedtime: the bedtime of this room as a time value
+        :param reservedForCounselors: a Boolean describing whether this is a counselor room
         """
-        Room.__init__(self, id, name)
+        Room.__init__(self, name)
         self.capacity = capacity
         self.inhabitants = inhabitants
         self.bedtime = bedtime
+        self.reservedForCounselors = reservedForCounselors
+# </editor-fold>
