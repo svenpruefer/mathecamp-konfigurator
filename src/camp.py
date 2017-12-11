@@ -18,25 +18,41 @@ class mathecamp():
 
     # <editor-fold desc="Constructor">
     def __init__(self, startDate = datetime.min, endDate = datetime.max, nextHumanId = 1, nextRoomId = 1, nextActivityId = 1,
-                 nextMathCircleId = 1, nextExpenseId = 1, rooms = [], activities = [], mathCircles = [], expenses = [],
-                 participants = [], counselors = [], guests = []):
+                 nextMathCircleId = 1, nextExpenseId = 1, rooms=None, activities=None, mathCircles=None, expenses=None,
+                 participants=None, counselors=None, guests=None):
         """
         The main constructor of a mathecamp instance
-        :param startDate:
-        :param endDate:
-        :param nextHumanId:
-        :param nextRoomId:
-        :param nextActivityId:
-        :param nextMathCircleId:
-        :param nextExpenseId:
-        :param rooms:
-        :param activities:
-        :param mathCircles:
-        :param expenses:
-        :param participants:
-        :param counselors:
-        :param guests:
+        :param startDate: the start date time of the camp
+        :param endDate: the end date time of the camp
+        :param nextHumanId: the next used Id for a human
+        :param nextRoomId: the next used Id for a room
+        :param nextActivityId: the next used Id for an activity
+        :param nextMathCircleId: the next used Id for a math circle
+        :param nextExpenseId: the next used Id for an expense
+        :param rooms: rooms in the camp as a dictionary
+        :param activities: activities in the camp as a dictionary
+        :param mathCircles: math circles in the camp as a dictionary
+        :param expenses: expenses in the camp as a dictionary
+        :param participants: participants in the camp as a dictionary
+        :param counselors: counselors in the camp as a dictionary
+        :param guests: guests in the camp as a dictionary
         """
+
+        if guests is None:
+            guests = {}
+        if counselors is None:
+            counselors = {}
+        if participants is None:
+            participants = {}
+        if expenses is None:
+            expenses = {}
+        if mathCircles is None:
+            mathCircles = {}
+        if activities is None:
+            activities = {}
+        if rooms is None:
+            rooms = {}
+
         self.dates = {"start" : startDate, "end" : endDate}
         self.nextIds = {"Human" : nextHumanId, "Room" : nextRoomId, "Activity" : nextActivityId,
                         "MathCircle" : nextMathCircleId, "Expense" : nextExpenseId}
@@ -55,7 +71,8 @@ class mathecamp():
         Serializes the state of the mathecamp such that it can be easily written to CSV files.
         :return: a dictionary containing the following data:
         generalData : a list of dictionaries each having an entry "parameter" and an entry "value" which represent
-        the general settings and data of the Mathecamp
+        the general settings and data of the mathecamp
+        rooms: a dictionary containing
 
         """
     # </editor-fold>
@@ -74,6 +91,7 @@ class mathecamp():
     # </editor-fold>
 
     # <editor-fold desc="Add data methods">
+
     def addRoom(self, room):
         """
         method for adding a room to the project

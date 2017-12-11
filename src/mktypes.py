@@ -143,27 +143,69 @@ class Room:
         """
         self.name = name
 
+    def __str__(self):
+        return("Room({0})".format(self.name))
+
+    def toDict(self):
+        """
+        serializes the room to a dictionary for saving its data in a csv file
+        :return: a dictionary with key name and its value
+        """
+        return({"name" : self.name})
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        """
+        creates a room from a dictionary with a key "name", inverse of toDict
+        :param dictionary: the dictionary containing data to create the room from
+        :return: the instance of the room
+        """
+        return Room(dictionary["name"])
+
 
 class GeneralRoom(Room):
     """
     This class represents a general room for everybodys usage
     """
 
-    def __init__(self, name, equipment):
+    def __init__(self, name, equipment=None):
         """
         The main constructor of a general room
         :param name: the name of the room as a string
-        :param equipment: the equipment available in this room as an enum of type Equipment
+        :param equipment: the equipment available in this room as a list of enums of type Equipment
         """
         Room.__init__(self, name)
+
+        if equipment is None:
+            equipment = []
+
         self.equipment = equipment
+
+    def __str__(self):
+        """
+        prints general room in constructor style
+        :return: string representation of general room
+        """
+        return("GeneralRoom({0},{1})".format(self.name, self.equipment))
+
+    def toDict(self):
+        """
+        serializes the general room to a dictionary for saving its data in a csv file
+        :return: a dictionary with keys name and equipment
+        """
+        return {"name" : self.name, "equipment" : self.equipment}
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        return GeneralRoom(dictionary["name"], dictionary["equipment"])
+
 
 class PrivateRoom(Room):
     """
     This class represents a private room for sleeping
     """
 
-    def __init__(self, name="", capacity=0, inhabitants=[], bedtime=time.max, reservedForCounselors = false):
+    def __init__(self, name="", capacity=0, inhabitants=None, bedtime=time.max, reservedForCounselors =False):
         """
         The main constructor of a private room
         :param name: the name of the room as a string
@@ -173,8 +215,37 @@ class PrivateRoom(Room):
         :param reservedForCounselors: a Boolean describing whether this is a counselor room
         """
         Room.__init__(self, name)
+
+        if inhabitants is None:
+            inhabitants = []
+
         self.capacity = capacity
         self.inhabitants = inhabitants
         self.bedtime = bedtime
         self.reservedForCounselors = reservedForCounselors
+
+    def __str__(self):
+        """
+        prints private room in constructor style
+        :return: string representation of private room
+        """
+        return("PrivateRoom({0},{1},{2},{3},{4})".format(self.name, self.capacity, self.inhabitants,
+                                                         self.bedtime, self.reservedForCounselors))
+
+    def toDict(self):
+        """
+        serializes the private room to a dictionary for saving its data in a csv file
+        :return: a dictionary with keys name, capacity, inhabitants, bedtime and reservedForCounselors
+        """
+        return {"name" : self.name,
+                "capacity" : self.capacity,
+                "inhabitants": self.inhabitants,
+                "bedtime": self.bedtime,
+                "reservedForCounselors" : self.reservedForCounselors
+                }
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        return PrivateRoom(dictionary["name"], dictionary["capacity"], dictionary["inhabitants"], dictionary["bedtime"],
+                           dictionary["reservedForCounselors"])
 # </editor-fold>
