@@ -81,16 +81,16 @@ class MathCircle:
         self.topics = topics
 
     def __str__(self):
-        return("MathCircle({0},{1},{2},{3},{4})".format(self.name, self.grade, self.members, self.room, self.topics))
+        return ("MathCircle({0},{1},{2},{3},{4})".format(self.name, self.grade, self.members, self.room, self.topics))
 
     def toDict(self):
-        return({"name" : self.name, "grade" : self.grade, "members" : self.members, "room" : self.room,
-                "topics" : self.topics})
+        return ({"name": self.name, "grade": self.grade, "members": self.members, "room": self.room,
+                 "topics": self.topics})
 
     @classmethod
     def fromDict(cls, dictionary):
-        return(MathCircle(dictionary["name"], dictionary["grade"], dictionary["members"], dictionary["room"],
-                          dictionary["topics"]))
+        return (MathCircle(dictionary["name"], dictionary["grade"], dictionary["members"], dictionary["room"],
+                           dictionary["topics"]))
 
 
 ############
@@ -125,13 +125,13 @@ class Activity:
         self.expenses = expenses
 
     def __str__(self):
-        return("Activity({0},[{1},{2}],{3},{4},{5},{6})".format(self.name, self.timeAndPlace.beginning,
-                                                          self.timeAndPlace.end, self.timeAndPlace.room,
-                                                          self.participants, self.organizers, self.expenses))
+        return ("Activity({0},[{1},{2}],{3},{4},{5},{6})".format(self.name, self.timeAndPlace.beginning,
+                                                                 self.timeAndPlace.end, self.timeAndPlace.room,
+                                                                 self.participants, self.organizers, self.expenses))
 
     def toDict(self):
-        return({"name" : self.name, "timeAndPlace" : self.timeAndPlace, "participants" : self.participants,
-                "organizers" : self.organizers, "expenses" : self.expenses})
+        return ({"name": self.name, "timeAndPlace": self.timeAndPlace, "participants": self.participants,
+                 "organizers": self.organizers, "expenses": self.expenses})
 
 
 ############
@@ -149,7 +149,7 @@ class Schedule:
         The main constructor of a (math circle) schedule
         :param listOfMathCircles: a list of tuples of IDs of (math circle, spacetime slot, teacher)
         """
-        if listOfMathCircles==None:
+        if listOfMathCircles == None:
             listOfMathCircles = []
         self.entries = listOfMathCircles
 
@@ -159,12 +159,12 @@ class Schedule:
         :return: a list where each entry is a dictionary containing a math circle ID, a spaceTime slot ID and
          a counselor ID
         """
-        return([{"mathCircleID" : entry[0], "spaceTimeSlotID" : entry[1], "teacher" : entry[2]}
-                for entry in self.entries])
+        return ([{"mathCircleID": entry[0], "spaceTimeSlotID": entry[1], "teacher": entry[2]}
+                 for entry in self.entries])
 
     @classmethod
     def fromDict(cls, dictionary):
-        return(Schedule([(dict["mathCircleID"], dict["spaceTimeSlotID"], dict["teacherID"]) for dict in dictionary]))
+        return (Schedule([(dict["mathCircleID"], dict["spaceTimeSlotID"], dict["teacherID"]) for dict in dictionary]))
 
 
 ############
@@ -185,14 +185,14 @@ class Expense:
         self.payedAlready = payedAlready
 
     def __str__(self):
-        return("Expense({0},{1},{2},{3})".format(self.name, self.amount, self.usage, self.payedAlready))
+        return ("Expense({0},{1},{2},{3})".format(self.name, self.amount, self.usage, self.payedAlready))
 
     def toDict(self):
-        return({"name" : self.name, "amount" : self.amount, "usage" : self.usage, "payedAlready" : self.payedAlready})
+        return ({"name": self.name, "amount": self.amount, "usage": self.usage, "payedAlready": self.payedAlready})
 
     @classmethod
     def fromDict(cls, dictionary):
-        return(Expense(dictionary["name"], dictionary["amount"], dictionary["usage"], dictionary["payedAlready"]))
+        return (Expense(dictionary["name"], dictionary["amount"], dictionary["usage"], dictionary["payedAlready"]))
 
 
 ####################
@@ -228,7 +228,7 @@ class SpaceTimeSlot:
         :param dictionary: the dictionary containing data to create the space-time slot from
         :return: the instance of the room
         """
-        return(SpaceTimeSlot(parse(dictionary["beginning"]), parse(dictionary["end"]), dictionary["room"]))
+        return (SpaceTimeSlot(parse(dictionary["beginning"]), parse(dictionary["end"]), dictionary["room"]))
 
 
 # <editor-fold desc="Room types">

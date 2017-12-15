@@ -4,8 +4,9 @@
 # Import #
 ##########
 
-#from datetime import *
+# from datetime import *
 from src.mktypes import *
+
 
 #########
 # Human #
@@ -16,15 +17,14 @@ class Human:
     This class is a general human, i.e. either a particpant, a counselor or a guest.
     """
 
-    def __init__(self, id=0, family_name="", given_name="", birthDate=date.min, gender=None, emailAddresses=[],
-                 phoneNumbers=[], street="", streetNumber="", postalCode="", place="", arrivalTime=None,
-                 arrivalType=None, departureTime=None, departureType=None, foodRestrictions=[], miscellaneous="",
+    def __init__(self, familyName="", givenName="", birthDate=date.min, gender=None, emailAddresses=None,
+                 phoneNumbers=None, street="", streetNumber="", postalCode="", place="", arrivalTime=None,
+                 arrivalType=None, departureTime=None, departureType=None, foodRestrictions=None, miscellaneous="",
                  room=None):
         """
         Basic constructor for general humans.
-        :param id: Unique id per Person in the whole Mathecamp
-        :param family_name: Persons family name
-        :param given_name: Persons given name
+        :param familyName: Persons family name
+        :param givenName: Persons given name
         :param birthDate: Persons birth date as a python3 Datetime.time value
         :param gender: Persons gender as an enum of type Gender
         :param emailAddresses: a list of email addresses for that person
@@ -39,11 +39,16 @@ class Human:
         :param departureType: Persons departure type at the Mathecamp as an enum of type TransportType
         :param foodRestrictions: Persons food restrictions as a list of enums of type FoodRestriction
         :param miscellaneous: a generic string
-        :param room: Persons room in Violau as a class of type Room
+        :param room: Persons room in Violau as an ID of a Room
         """
-        self.id = id
-        self.family_name = family_name
-        self.given_name = given_name
+        if phoneNumbers is None:
+            phoneNumbers = []
+        if foodRestrictions is None:
+            foodRestrictions = []
+        if emailAddresses is None:
+            emailAddresses = []
+        self.familyName = familyName
+        self.givenName = givenName
         self.birthDate = birthDate
         self.gender = gender
         self.emailAddresses = emailAddresses
@@ -67,6 +72,48 @@ class Human:
         """
         return self.street + " " + self.streetNumber + ", " + str(self.postalCode) + " " + self.place
 
+    def __str__(self):
+        return ("Human({},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{})".format(self.familyName, self.givenName,
+                                                                                   self.birthDate, self.gender,
+                                                                                   self.emailAddresses,
+                                                                                   self.phoneNumbers,
+                                                                                   self.street, self.streetNumber,
+                                                                                   self.postalCode, self.place,
+                                                                                   self.arrivalTime, self.arrivalType,
+                                                                                   self.departureTime,
+                                                                                   self.departureType,
+                                                                                   self.foodRestrictions,
+                                                                                   self.miscellaneuos, self.room))
+
+    def toDict(self):
+        """
+        returns a dictionary of the human for saving in a csv file
+        :return: a dictionary with keys familyName, givenName, birthDate, gender, emailAddresses, phoneNumbers, street,
+        streetNumber, postalCode, place, arrivalTime, arrivalType, departureTime, departureType, foodRestrictions,
+        miscellaneuos and room
+        """
+        return ({"familyName": self.familyName, "givenName": self.givenName, "birthDate": self.birthDate,
+                 "gender": self.gender, "emailAddresses": self.emailAddresses, "phoneNumbers": self.phoneNumbers,
+                 "street": self.street, "streetNumber": self.streetNumber, "postalCode": self.postalCode,
+                 "place": self.place, "arrivalTime": self.arrivalTime, "arrivalType": self.arrivalType,
+                 "departureTime": self.departureTime, "departureType": self.departureType,
+                 "foodRestrictions": self.foodRestrictions, "miscellaneuos": self.miscellaneuos, "room": self.room})
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        """
+        creates a human instance from a dictionary, inverse to 'toDict'
+        :return: an instance of human
+        """
+        return (Human(dictionary["familyName"], dictionary["givenName"], dictionary["birthDate"], dictionary["gender"],
+                      dictionary["emailAddresses"], dictionary["phoneNumbers"], dictionary["street"],
+                      dictionary["streetNumber"],
+                      dictionary["postalCode"], dictionary["place"], dictionary["arrivalTime"],
+                      dictionary["arrivalType"],
+                      dictionary["departureTime"], dictionary["departureType"], dictionary["foodRestrictions"],
+                      dictionary["miscellaneuos"], dictionary["room"]))
+
+
 ###############
 # Participant #
 ###############
@@ -78,18 +125,17 @@ class Participant(Human):
 
     occupation = Occupation.PARTICIPANT
 
-    def __init__(self, id=0, family_name="", given_name="", birthDate=date.min, campPrice=0,
-                 moneyPayedAlready=0, circle=None, grade=0, topicWishes=[], emailAddresses=[],
-                 emailAdressesParents=[], gender=None, phoneNumbers=[], phoneNumbersEmergency={},  room=None,
+    def __init__(self, familyName="", givenName="", birthDate=date.min, campPrice=0,
+                 moneyPayedAlready=0, circle=None, grade=0, topicWishes=None, emailAddresses=None,
+                 emailAdressesParents=None, gender=None, phoneNumbers=None, phoneNumbersEmergency=None, room=None,
                  street="", streetNumber="", postalCode="", place="", arrivalTime=None, arrivalType=None,
-                 departureTime=None, departureType=None, departureOtherPerson=[], friends=[], instrument=[],
-                 medicalDrugs=[], foodRestrictions=[], illness="", rideSharing=None, swimmingPermission=None,
+                 departureTime=None, departureType=None, departureOtherPerson=None, friends=None, instrument=None,
+                 medicalDrugs=None, foodRestrictions=None, illness="", rideSharing=None, swimmingPermission=None,
                  leavingPermission=None, sportsPermission=None, miscellaneous=""):
         """
         Basic constructor for participants
-        :param id: Unique id per Person in the whole mathecamp
-        :param family_name: Participants family name
-        :param given_name: Participants given name
+        :param familyName: Participants family name
+        :param givenName: Participants given name
         :param birthDate: Participants birthDate as a python3 datetime.date value
         :param campPrice: Corresponding price for person as an integer, might be 0
         :param moneyPayedAlready: Already payed amounts of money as integers
@@ -126,9 +172,31 @@ class Participant(Human):
         :param miscellaneous: a string for miscellaneous information
         """
 
-        Human.__init__(self, id, family_name, given_name, birthDate, gender, emailAddresses,
-                 phoneNumbers, street, streetNumber, postalCode, place, arrivalTime,
-                 arrivalType, departureTime, departureType, foodRestrictions, miscellaneous, room)
+        if phoneNumbers is None:
+            phoneNumbers = []
+        if emailAdressesParents is None:
+            emailAdressesParents = []
+        if medicalDrugs is None:
+            medicalDrugs = []
+        if foodRestrictions is None:
+            foodRestrictions = []
+        if departureOtherPerson is None:
+            departureOtherPerson = []
+        if instrument is None:
+            instrument = []
+        if friends is None:
+            friends = []
+        if phoneNumbersEmergency is None:
+            phoneNumbersEmergency = {}
+        if emailAddresses is None:
+            emailAddresses = []
+        if topicWishes is None:
+            topicWishes = []
+
+        Human.__init__(self, familyName, givenName, birthDate, gender, emailAddresses,
+                       phoneNumbers, street, streetNumber, postalCode, place, arrivalTime,
+                       arrivalType, departureTime, departureType, foodRestrictions, miscellaneous, room)
+
         self.campPrice = campPrice
         self.moneyPayedAlready = moneyPayedAlready
         self.circle = circle
@@ -146,6 +214,58 @@ class Participant(Human):
         self.leavingPermission = leavingPermission
         self.sportsPermission = sportsPermission
 
+    def __str__(self):
+        humanPrint = Human.__str__(self)[5:]
+        return ("Participant" + humanPrint[:len(
+            humanPrint) - 1] + ", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})"
+                .format(self.campPrice, self.moneyPayedAlready, self.circle, self.grade, self.topicWishes,
+                        self.emailAddressesParents, self.phoneNumbersEmergency, self.departureOtherPerson, self.friends,
+                        self.instrument, self.medicalDrugs, self.illness, self.rideSharing,
+                        self.swimmingPermission, self.leavingPermission, self.sportsPermission))
+
+    def toDict(self):
+        """
+        returns a dictionary of the participant for saving in a csv file
+        :return: a dictionary with keys familyName, givenName, birthDate, gender, emailAddresses, phoneNumbers, street,
+        streetNumber, postalCode, place, arrivalTime, arrivalType, departureTime, departureType, foodRestrictions,
+        miscellaneuos, room, grade, circle, campPrice, moneyPayedAlready, topicWishes, emailAddressesParents,
+        phoneNumbersEmergency, departureOtherPerson, friends, instrument, medicalDrugs, foodRestrictions, illness,
+        rideSharing, swimmingPermission, leavingPermission, sportsPermission
+        """
+        newDict = Human.toDict(self)
+        for (k, v) in {"grade": self.grade, "circle": self.circle, "campPrice": self.campPrice,
+                       "moneyPayedAlready": self.moneyPayedAlready, "topicWishes": self.topicWishes,
+                       "emailAddressesParents": self.emailAddressesParents,
+                       "phoneNumbersEmergency": self.phoneNumbersEmergency,
+                       "departureOtherPerson": self.departureOtherPerson,
+                       "friends": self.friends, "instrument": self.instrument, "medicalDrugs": self.medicalDrugs,
+                       "illness": self.illness, "rideSharing": self.rideSharing,
+                       "swimmingPermission": self.swimmingPermission, "leavingPermission": self.leavingPermission,
+                       "sportsPermission": self.sportsPermission}.items():
+            newDict[k] = v
+        return (newDict)
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        """
+        creates a participant instance from a dictionary, inverse to 'toDict'
+        :return: an instance of a participant
+        """
+        return (Participant(dictionary["familyName"], dictionary["givenName"], dictionary["birthDate"],
+                            dictionary["campPrice"], dictionary["moneyPayedAlready"], dictionary["circle"],
+                            dictionary["grade"], dictionary["topicWishes"], dictionary["emailAddresses"],
+                            dictionary["emailAddressesParents"], dictionary["gender"], dictionary["phoneNumbers"],
+                            dictionary["phoneNumbersEmergency"], dictionary["room"], dictionary["street"],
+                            dictionary["streetNumber"], dictionary["postalCode"], dictionary["place"],
+                            dictionary["arrivalTime"],
+                            dictionary["arrivalType"], dictionary["departureTime"], dictionary["departureType"],
+                            dictionary["departureOtherPerson"], dictionary["friends"], dictionary["instrument"],
+                            dictionary["medicalDrugs"], dictionary["foodRestrictions"], dictionary["illness"],
+                            dictionary["rideSharing"], dictionary["swimmingPermission"],
+                            dictionary["leavingPermission"],
+                            dictionary["sportsPermission"], dictionary["miscellaneuos"]))
+
+
 #############
 # Counselor #
 #############
@@ -157,15 +277,14 @@ class Counselor(Human):
 
     occupation = Occupation.COUNSELOR
 
-    def __init__(self, id=0, family_name="", given_name="", birthDate=date.min, emailAddresses=[], gender=None,
-                 phoneNumbers=[], street="", streetNumber="", postalCode="", place="",
-                 arrivalTime=None, arrivalType=None, departureTime=None, departureType=None, foodRestrictions=[],
-                 miscellaneous="", room=None, preferredGrades=[]):
+    def __init__(self, familyName="", givenName="", birthDate=date.min, gender=None, emailAddresses=None,
+                 phoneNumbers=None, street="", streetNumber="", postalCode="", place="",
+                 arrivalTime=None, arrivalType=None, departureTime=None, departureType=None, foodRestrictions=None,
+                 miscellaneous="", room=None, preferredGrades=None):
         """
         Basic constructor for counselors
-        :param id: Unique id per Person in the whole mathecamp
-        :param family_name: Participants family name
-        :param given_name: Participants given name
+        :param familyName: Participants family name
+        :param givenName: Participants given name
         :param birthDate: Participants birthDate as a python3 datetime.date value
         :param emailAddresses: a list of stings of email addresses of the participant
         :param gender: the participants gender as an enum of type Gender
@@ -183,11 +302,49 @@ class Counselor(Human):
         :param room: the participants room as the id (i.e. an integer) of the corresponding room
         :param preferredGrades: the preferred grades of the counselor as a list of integers
         """
+        if emailAddresses is None:
+            emailAddresses = []
+        if foodRestrictions is None:
+            foodRestrictions = []
+        if preferredGrades is None:
+            preferredGrades = []
+        if phoneNumbers is None:
+            phoneNumbers = []
+        Human.__init__(self, familyName, givenName, birthDate, gender, emailAddresses,
+                       phoneNumbers, street, streetNumber, postalCode, place, arrivalTime,
+                       arrivalType, departureTime, departureType, foodRestrictions, miscellaneous, room)
+        self.preferredGrades = preferredGrades
 
-        Human.__init__(self, id, family_name, given_name, birthDate, gender, emailAddresses,
-                 phoneNumbers, street, streetNumber, postalCode, place, arrivalTime,
-                 arrivalType, departureTime, departureType, foodRestrictions, miscellaneous, room)
-        self.preferredGrades= preferredGrades
+    def __str__(self):
+        humanPrint = Human.__str__(self)[5:]
+        return ("Counselor" + humanPrint[:len(humanPrint) - 1] + ", {})".format(self.preferredGrades))
+
+    def toDict(self):
+        """
+        returns a dictionary of the counselor for saving in a csv file
+        :return: a dictionary with keys familyName, givenName, birthDate, gender, emailAddresses, phoneNumbers, street,
+        streetNumber, postalCode, place, arrivalTime, arrivalType, departureTime, departureType, foodRestrictions,
+        miscellaneuos, room and preferredGrades
+        """
+        newDict = Human.toDict(self)
+        newDict["preferredGrades"] = self.preferredGrades
+        return (newDict)
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        """
+        creates a counselor instance from a dictionary, inverse to 'toDict'
+        :return: an instance of a counselor
+        """
+        return (Counselor(dictionary["familyName"], dictionary["givenName"], dictionary["birthDate"],
+                          dictionary["gender"], dictionary["emailAddresses"],
+                          dictionary["phoneNumbers"], dictionary["street"],
+                          dictionary["streetNumber"],
+                          dictionary["postalCode"], dictionary["place"], dictionary["arrivalTime"],
+                          dictionary["arrivalType"],
+                          dictionary["departureTime"], dictionary["departureType"], dictionary["foodRestrictions"],
+                          dictionary["miscellaneuos"], dictionary["room"], dictionary["preferredGrades"]))
+
 
 #########
 # Guest #
@@ -200,15 +357,14 @@ class Guest(Human):
 
     occupation = Occupation.GUEST
 
-    def __init__(self, id=0, family_name="", given_name="", birthDate=date.min, emailAddresses=[], gender=None,
-                 phoneNumbers=[], street="", streetNumber="", postalCode="", place="",
-                 arrivalTime=None, arrivalType=None, departureTime=None, departureType=None, foodRestrictions=[],
+    def __init__(self, familyName="", givenName="", birthDate=date.min, gender=None, emailAddresses=None,
+                 phoneNumbers=None, street="", streetNumber="", postalCode="", place="",
+                 arrivalTime=None, arrivalType=None, departureTime=None, departureType=None, foodRestrictions=None,
                  miscellaneous="", room=None):
         """
         Basic constructor for guests
-        :param id: Unique id per Person in the whole mathecamp
-        :param family_name: Guests family name
-        :param given_name: Guests given name
+        :param familyName: Guests family name
+        :param givenName: Guests given name
         :param birthDate: Guests birthDate as a python3 datetime.date value
         :param emailAddresses: a list of stings of email addresses of the Guest
         :param gender: the Guests gender as an enum of type Gender
@@ -225,6 +381,38 @@ class Guest(Human):
         :param miscellaneous: a string for miscellaneous information
         :param room: the Guests room as the id (i.e. an integer) of the corresponding room
         """
-        Human.__init__(self, id, family_name, given_name, birthDate, gender, emailAddresses,
+        if foodRestrictions is None:
+            foodRestrictions = []
+        if emailAddresses is None:
+            emailAddresses = []
+        if phoneNumbers is None:
+            phoneNumbers = []
+        Human.__init__(self, familyName, givenName, birthDate, gender, emailAddresses,
                        phoneNumbers, street, streetNumber, postalCode, place, arrivalTime,
                        arrivalType, departureTime, departureType, foodRestrictions, miscellaneous, room)
+
+    def __str__(self):
+        guestString = Human.__str__(self)[5:]
+        return ("Guest" + guestString)
+
+    def toDict(self):
+        """
+        maps guest instance to dictionary in order to save it to a csv file
+        :return: a dictionary with keys
+        """
+        return (Human.toDict(self))
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        """
+        parses a dictionary and yields a guest instance, inverse to toDict
+        :param dictionary: the dictionary to parse
+        :return: an instance of a guest
+        """
+        return (Guest(dictionary["familyName"], dictionary["givenName"], dictionary["birthDate"], dictionary["gender"],
+                      dictionary["emailAddresses"], dictionary["phoneNumbers"], dictionary["street"],
+                      dictionary["streetNumber"],
+                      dictionary["postalCode"], dictionary["place"], dictionary["arrivalTime"],
+                      dictionary["arrivalType"],
+                      dictionary["departureTime"], dictionary["departureType"], dictionary["foodRestrictions"],
+                      dictionary["miscellaneuos"], dictionary["room"]))

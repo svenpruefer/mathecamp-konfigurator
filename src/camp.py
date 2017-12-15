@@ -6,6 +6,7 @@
 from datetime import *
 from src.people import *
 
+
 #############
 # Mathecamp #
 #############
@@ -17,8 +18,8 @@ class mathecamp():
     """
 
     # <editor-fold desc="Constructor">
-    def __init__(self, startDate = datetime.min, endDate = datetime.max, nextHumanId = 1, nextRoomId = 1, nextActivityId = 1,
-                 nextMathCircleId = 1, nextExpenseId = 1, rooms=None, activities=None, mathCircles=None, expenses=None,
+    def __init__(self, startDate=datetime.min, endDate=datetime.max, nextHumanId=1, nextRoomId=1, nextActivityId=1,
+                 nextMathCircleId=1, nextExpenseId=1, rooms=None, activities=None, mathCircles=None, expenses=None,
                  participants=None, counselors=None, guests=None):
         """
         The main constructor of a mathecamp instance
@@ -53,9 +54,9 @@ class mathecamp():
         if rooms is None:
             rooms = {}
 
-        self.dates = {"start" : startDate, "end" : endDate}
-        self.nextIds = {"Human" : nextHumanId, "Room" : nextRoomId, "Activity" : nextActivityId,
-                        "MathCircle" : nextMathCircleId, "Expense" : nextExpenseId}
+        self.dates = {"start": startDate, "end": endDate}
+        self.nextIds = {"Human": nextHumanId, "Room": nextRoomId, "Activity": nextActivityId,
+                        "MathCircle": nextMathCircleId, "Expense": nextExpenseId}
         self.rooms = rooms
         self.activities = activities
         self.mathCircles = mathCircles
@@ -63,6 +64,7 @@ class mathecamp():
         self.participants = participants
         self.counselors = counselors
         self.guests = guests
+
     # </editor-fold>
 
     # <editor-fold desc="Serialization">
@@ -75,6 +77,7 @@ class mathecamp():
         rooms: a dictionary containing
 
         """
+
     # </editor-fold>
 
     # <editor-fold desc="Helper methods">
@@ -88,6 +91,7 @@ class mathecamp():
             return True
         else:
             return False
+
     # </editor-fold>
 
     # <editor-fold desc="Add data methods">
@@ -147,4 +151,4 @@ class mathecamp():
 
         self.expenses.append((self.nextIds["Expense"], expense))
         self.nextIds["Expense"] += 1
-    # </editor-fold>
+        # </editor-fold>
