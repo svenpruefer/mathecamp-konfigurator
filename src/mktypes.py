@@ -125,13 +125,17 @@ class Activity:
         self.expenses = expenses
 
     def __str__(self):
-        return ("Activity({0},[{1},{2}],{3},{4},{5},{6})".format(self.name, self.timeAndPlace.beginning,
-                                                                 self.timeAndPlace.end, self.timeAndPlace.room,
-                                                                 self.participants, self.organizers, self.expenses))
+        return ("Activity({0},{1},{2},{3},{4})".format(self.name, self.timeAndPlace,
+                                                           self.participants, self.organizers, self.expenses))
 
     def toDict(self):
         return ({"name": self.name, "timeAndPlace": self.timeAndPlace, "participants": self.participants,
                  "organizers": self.organizers, "expenses": self.expenses})
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        return(Activity(dictionary["name"], dictionary["timeAndPlace"], dictionary["participants"],
+                        dictionary["organizers"], dictionary["expenses"]))
 
 
 ############

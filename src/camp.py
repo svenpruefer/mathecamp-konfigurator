@@ -19,8 +19,9 @@ class mathecamp():
 
     # <editor-fold desc="Constructor">
     def __init__(self, startDate=datetime.min, endDate=datetime.max, nextHumanId=1, nextRoomId=1, nextActivityId=1,
-                 nextMathCircleId=1, nextExpenseId=1, rooms=None, activities=None, mathCircles=None, expenses=None,
-                 participants=None, counselors=None, guests=None):
+                 nextMathCircleId=1, nextExpenseId=1, nextSpaceTimeSlotId=1, rooms=None, activities=None,
+                 mathCircles=None, expenses=None,
+                 participants=None, counselors=None, guests=None, schedule=None):
         """
         The main constructor of a mathecamp instance
         :param startDate: the start date time of the camp
@@ -30,6 +31,7 @@ class mathecamp():
         :param nextActivityId: the next used Id for an activity
         :param nextMathCircleId: the next used Id for a math circle
         :param nextExpenseId: the next used Id for an expense
+        :param nextSpaceTimeSlotId: the next used Id for a space-time slot
         :param rooms: rooms in the camp as a dictionary
         :param activities: activities in the camp as a dictionary
         :param mathCircles: math circles in the camp as a dictionary
@@ -53,10 +55,12 @@ class mathecamp():
             activities = {}
         if rooms is None:
             rooms = {}
+        if schedule is None:
+            schedule = []
 
         self.dates = {"start": startDate, "end": endDate}
         self.nextIds = {"Human": nextHumanId, "Room": nextRoomId, "Activity": nextActivityId,
-                        "MathCircle": nextMathCircleId, "Expense": nextExpenseId}
+                        "MathCircle": nextMathCircleId, "Expense": nextExpenseId, "SpaceTimeSlot": nextSpaceTimeSlotId}
         self.rooms = rooms
         self.activities = activities
         self.mathCircles = mathCircles
@@ -64,19 +68,78 @@ class mathecamp():
         self.participants = participants
         self.counselors = counselors
         self.guests = guests
+        self.schedule = schedule
 
     # </editor-fold>
 
     # <editor-fold desc="Serialization">
-    def serializeToDictionaries(self):
+    def toDict(self):
         """
         Serializes the state of the mathecamp such that it can be easily written to CSV files.
         :return: a dictionary containing the following data:
         generalData : a list of dictionaries each having an entry "parameter" and an entry "value" which represent
         the general settings and data of the mathecamp
-        rooms: a dictionary containing
-
+        rooms, activities, mathCircles, expenses, participants, counselors, guests and schedule: dictionaries with IDs
+        as keys and dictionaries with their respective data as values
         """
+
+        generalDataDict = {}
+        roomDict = {}
+        activityDict = {}
+        mathCircleDict = {}
+        expenseDict = {}
+        participantDict = {}
+        counselorDict = {}
+        guestDict = {}
+
+        generalDataDict["startDate"] = self.dates["start"]
+        generalDataDict["endDate"] = self.dates["end"]
+        generalDataDict["nextHumanId"] = self.nextIds["Human"]
+        generalDataDict["nextActivityId"] = self.nextIds["Activity"]
+        generalDataDict["nextRoomId"] = self.nextIds["Room"]
+        generalDataDict["nextExpenseId"] = self.nextIds["Expense"]
+        generalDataDict["nextSpaceTimeSlotId"] = self.nextIds["SpaceTimeSlot"]
+        generalDataDict["nextMathCircleId"] = self.nextIds["MathCircle"]
+
+        for (k, v) in self.rooms.items():
+            roomDict[k] = v.toDict
+
+        for (k, v) in self.activities.items():
+            activityDict[k] = v.toDict
+
+        for (k, v) in self.mathCircles.items():
+            mathCircleDict[k] = v.toDict
+
+        for (k, v) in self.expenses.items():
+            expenseDict[k] = v.toDict
+
+        for (k, v) in self.participants.items():
+            participantDict[k] = v.toDict
+
+        for (k, v) in self.counselors.items():
+            counselorDict[k] = v.toDict
+
+        for (k, v) in self.guests.items():
+            guestDict[k] = v.toDict
+
+        return({
+            "generalData" : generalDataDict,
+            "activities" : activityDict,
+            "mathCircles" : mathCircleDict,
+            "expenses" : expenseDict,
+            "participants" : participantDict,
+            "counselors" : counselorDict,
+            "guests" : guestDict
+        })
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        """
+        opposite of 'toDict", deserializes a dictionary of dictionaries to a new instance of mathecamp
+        :param dictionary: data to deserialize
+        :return: a new instance of a mathecamp
+        """
+        pass
 
     # </editor-fold>
 
@@ -151,4 +214,7 @@ class mathecamp():
 
         self.expenses.append((self.nextIds["Expense"], expense))
         self.nextIds["Expense"] += 1
+
         # </editor-fold>
+
+        # TODO How to deal with schedule?

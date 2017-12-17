@@ -2,6 +2,38 @@ from datetime import time, date, datetime
 from src.mktypes import Room, Equipment, GeneralRoom, PrivateRoom, Gender, TransportType, FoodRestriction
 from src.people import Human, Participant, Counselor, Guest
 
+################
+# Sample Cases #
+################
+
+def getHumanExample():
+    return(Human("Ferdinand", "Karl", date(1987, 8, 20), Gender.MALE, ["test@musmehl.de"], ["01112222222"],
+                  "Karl-Liebknecht-Str.", 13, "86153", "Entenhausen", datetime(2018, 8, 19, 9, 30, 0),
+                  TransportType.BUS,
+                  datetime(2018, 8, 27, 11, 30, 0), TransportType.PRIVATE, [FoodRestriction.CELIAC_DISEASE],
+                  "Supercooler Typ!!!", 42))
+
+def getParticipantExample():
+    return(Participant("Weihnachtsmann", "Der", date(1987, 8, 20), 300, False, "10a", 10, ["Programmieren"],
+                              ["test@musmehl.de"], ["test2@musmehl.de"], Gender.MALE, ["01112222222"], {}, 42,
+                              "Karl-Liebknecht-Str.", "13", "86153", "Entenhausen", datetime(2018, 8, 19, 9, 30, 0),
+                              TransportType.BUS, datetime(2018, 8, 27, 11, 30, 0), TransportType.PRIVATE, ["Uroma"],
+                              [50, 62], ["Geige"], ["Kokain"], [FoodRestriction.CELIAC_DISEASE], ["Schnupfen"], False,
+                              True, True, True, "Supercooler Typ!!!"))
+
+def getCounselorExample():
+    return(Counselor("Merkel", "Angela", date(1987, 8, 20), Gender.MALE, ["test@musmehl.de"], ["01112222222"],
+                          "Karl-Liebknecht-Str.", 13, "86153", "Entenhausen", datetime(2018, 8, 19, 9, 30, 0),
+                          TransportType.BUS,
+                          datetime(2018, 8, 27, 11, 30, 0), TransportType.PRIVATE, [FoodRestriction.CELIAC_DISEASE],
+                          "Supercooler Typ!!!", 42, [8, 9]))
+
+def getGuestExample():
+    return(Guest("Bombadil", "Tom", date(1987, 8, 20), Gender.MALE, ["test@musmehl.de"], ["01112222222"],
+                  "Karl-Liebknecht-Str.", 13, "86153", "Entenhausen", datetime(2018, 8, 19, 9, 30, 0),
+                  TransportType.BUS,
+                  datetime(2018, 8, 27, 11, 30, 0), TransportType.PRIVATE, [FoodRestriction.CELIAC_DISEASE],
+                  "Supercooler Typ!!!", 42))
 
 #####################
 # Constructor tests #

@@ -1,6 +1,18 @@
 from datetime import time
 from src.mktypes import Room, Equipment, GeneralRoom, PrivateRoom
 
+################
+# Sample Cases #
+################
+
+def getRoomExample():
+    return(Room("test"))
+
+def getGeneralRoomExample():
+    return(GeneralRoom("test", [Equipment.PIANO, Equipment.CANVAS]))
+
+def getPrivateRoomExample():
+    return(PrivateRoom("test", 17, [3, 7, 1], time(22, 0, 0), False))
 
 #####################
 # Constructor Tests #
