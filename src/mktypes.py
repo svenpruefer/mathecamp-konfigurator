@@ -157,13 +157,16 @@ class Schedule:
             listOfMathCircles = []
         self.entries = listOfMathCircles
 
+    def __str__(self):
+        return("Schedule({})".format(self.entries))
+
     def toDict(self):
         """
         maps the schedule to a list of dictionaries for saving it in a csv file
         :return: a list where each entry is a dictionary containing a math circle ID, a spaceTime slot ID and
          a counselor ID
         """
-        return ([{"mathCircleID": entry[0], "spaceTimeSlotID": entry[1], "teacher": entry[2]}
+        return ([{"mathCircleID": entry[0], "spaceTimeSlotID": entry[1], "teacherID": entry[2]}
                  for entry in self.entries])
 
     @classmethod
