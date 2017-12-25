@@ -97,7 +97,7 @@ class Human:
                  "street": self.street, "streetNumber": self.streetNumber, "postalCode": self.postalCode,
                  "place": self.place, "arrivalTime": self.arrivalTime, "arrivalType": self.arrivalType,
                  "departureTime": self.departureTime, "departureType": self.departureType,
-                 "foodRestrictions": self.foodRestrictions, "miscellaneuos": self.miscellaneuos, "room": self.room})
+                 "foodRestrictions": self.foodRestrictions, "miscellaneous": self.miscellaneuos, "room": self.room})
 
     @classmethod
     def fromDict(cls, dictionary):
@@ -111,7 +111,7 @@ class Human:
                       dictionary["postalCode"], dictionary["place"], dictionary["arrivalTime"],
                       dictionary["arrivalType"],
                       dictionary["departureTime"], dictionary["departureType"], dictionary["foodRestrictions"],
-                      dictionary["miscellaneuos"], dictionary["room"]))
+                      dictionary["miscellaneous"], dictionary["room"]))
 
 
 ###############
@@ -263,7 +263,7 @@ class Participant(Human):
                             dictionary["medicalDrugs"], dictionary["foodRestrictions"], dictionary["illness"],
                             dictionary["rideSharing"], dictionary["swimmingPermission"],
                             dictionary["leavingPermission"],
-                            dictionary["sportsPermission"], dictionary["miscellaneuos"]))
+                            dictionary["sportsPermission"], dictionary["miscellaneous"]))
 
 
 #############
@@ -343,7 +343,7 @@ class Counselor(Human):
                           dictionary["postalCode"], dictionary["place"], dictionary["arrivalTime"],
                           dictionary["arrivalType"],
                           dictionary["departureTime"], dictionary["departureType"], dictionary["foodRestrictions"],
-                          dictionary["miscellaneuos"], dictionary["room"], dictionary["preferredGrades"]))
+                          dictionary["miscellaneous"], dictionary["room"], dictionary["preferredGrades"]))
 
 
 #########
@@ -415,4 +415,4 @@ class Guest(Human):
                       dictionary["postalCode"], dictionary["place"], dictionary["arrivalTime"],
                       dictionary["arrivalType"],
                       dictionary["departureTime"], dictionary["departureType"], dictionary["foodRestrictions"],
-                      dictionary["miscellaneuos"], dictionary["room"]))
+                      dictionary["miscellaneous"], dictionary["room"]))
