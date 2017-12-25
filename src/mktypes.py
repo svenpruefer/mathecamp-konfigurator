@@ -203,6 +203,7 @@ class Expense:
 # Space-Time Slots #
 ####################
 
+
 class SpaceTimeSlot:
     """
     This class represents a time slot with a beginning and an end as well as a place. Either can be empty. A time
@@ -232,7 +233,7 @@ class SpaceTimeSlot:
         :param dictionary: the dictionary containing data to create the space-time slot from
         :return: the instance of the room
         """
-        return (SpaceTimeSlot(parse(dictionary["beginning"]), parse(dictionary["end"]), dictionary["room"]))
+        return (SpaceTimeSlot(dictionary["beginning"], dictionary["end"], dictionary["room"]))
 
 
 # <editor-fold desc="Room types">

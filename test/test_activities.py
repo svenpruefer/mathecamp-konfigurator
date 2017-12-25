@@ -6,7 +6,9 @@ from src.mktypes import Activity
 ################
 
 def getActivityExample():
-    return (Activity("Fußball", 2, [1,2], [3], [1]))
+    return (Activity("Fußball", 2, [1, 2], [3], [1]),
+            {"name": "Fußball", "timeAndPlace": 2, "participants": [1, 2], "organizers": [3],
+             "expenses": [1]})
 
 
 #####################
@@ -14,9 +16,8 @@ def getActivityExample():
 #####################
 
 def test_activityConstructorAndToDict():
-    activity = getActivityExample()
-    assert (activity.toDict() == {"name": "Fußball", "timeAndPlace": 2, "participants": [1,2], "organizers": [3],
-                                    "expenses": [1]})
+    (activity, activityDict) = getActivityExample()
+    assert (activity.toDict() == activityDict)
 
 
 ####################
@@ -24,8 +25,7 @@ def test_activityConstructorAndToDict():
 ####################
 
 def test_activityToDictAndFromDict():
-    activityDictionary = {"name": "Fußball", "timeAndPlace": 2, "participants": [1,2], "organizers": [3],
-                            "expenses": [1]}
+    activityDictionary = getActivityExample()[1]
     assert (Activity.fromDict(activityDictionary).toDict() == activityDictionary)
 
 
@@ -34,5 +34,5 @@ def test_activityToDictAndFromDict():
 ###############
 
 def test_activityPrint():
-    activity = getActivityExample()
+    activity = getActivityExample()[0]
     assert (activity.__str__() == "Activity(Fußball,2,[1, 2],[3],[1])")
