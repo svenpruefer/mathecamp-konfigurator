@@ -5,7 +5,7 @@
 ##########
 
 # from datetime import *
-from src.mktypes import *
+from mathecamp_konfigurator.mktypes import *
 
 
 #########

@@ -1,4 +1,4 @@
-from src.mktypes import Activity
+from mathecamp_konfigurator.mktypes import Activity
 
 
 ################

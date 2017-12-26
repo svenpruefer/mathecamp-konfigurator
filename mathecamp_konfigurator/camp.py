@@ -4,7 +4,7 @@
 # Imports #
 ###########
 from datetime import *
-from src.people import *
+from mathecamp_konfigurator.people import *
 
 
 #############

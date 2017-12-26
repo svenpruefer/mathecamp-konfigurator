@@ -1,5 +1,5 @@
 from datetime import datetime
-from src.mktypes import Schedule
+from mathecamp_konfigurator.mktypes import Schedule
 
 
 ################

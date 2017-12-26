@@ -1,5 +1,5 @@
 from datetime import datetime
-from src.mktypes import SpaceTimeSlot
+from mathecamp_konfigurator.mktypes import SpaceTimeSlot
 
 
 ################

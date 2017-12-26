@@ -1,5 +1,5 @@
 from datetime import time
-from src.mktypes import Room, Equipment, GeneralRoom, PrivateRoom
+from mathecamp_konfigurator.mktypes import Room, Equipment, GeneralRoom, PrivateRoom
 
 
 ################

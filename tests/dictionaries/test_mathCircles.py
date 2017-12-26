@@ -1,4 +1,4 @@
-from src.mktypes import MathCircle
+from mathecamp_konfigurator.mktypes import MathCircle
 
 
 ################

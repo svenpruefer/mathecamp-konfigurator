@@ -1,4 +1,6 @@
-# This is the main file of mathecamp-konfigurator
+# -*- coding: utf-8 -*-
+
+"""Main module."""
 
 ###########
 # Imports #

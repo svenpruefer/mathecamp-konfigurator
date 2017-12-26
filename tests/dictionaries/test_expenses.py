@@ -1,4 +1,4 @@
-from src.mktypes import Expense
+from mathecamp_konfigurator.mktypes import Expense
 
 
 ################
