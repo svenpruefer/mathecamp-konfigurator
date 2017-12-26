@@ -6,7 +6,7 @@ from src.mktypes import Expense
 ################
 
 def getExpenseExample():
-    return (Expense("Garn", 20, [3, 8], False))
+    return (Expense("Garn", 20, [1, 2], False), {"name": "Garn", "amount": 20, "usage": [3, 8], "payedAlready": False})
 
 
 #####################
@@ -14,8 +14,8 @@ def getExpenseExample():
 #####################
 
 def test_expenseConstructorAndToDict():
-    expense = getExpenseExample()
-    assert (expense.toDict() == {"name": "Garn", "amount": 20, "usage": [3, 8], "payedAlready": False})
+    (expense, expenseDict) = getExpenseExample()
+    assert (expense.toDict() == expenseDict)
 
 
 ####################
@@ -23,7 +23,7 @@ def test_expenseConstructorAndToDict():
 ####################
 
 def test_expenseToDictAndFromDict():
-    expenseDictionary = {"name": "Garn", "amount": 20, "usage": [3, 8], "payedAlready": False}
+    expenseDictionary = getExpenseExample()[1]
     assert (Expense.fromDict(expenseDictionary).toDict() == expenseDictionary)
 
 
@@ -32,5 +32,5 @@ def test_expenseToDictAndFromDict():
 ###############
 
 def test_expensePrint():
-    expense = getExpenseExample()
-    assert (expense.__str__() == "Expense(Garn,20,[3, 8],False)")
+    expense = getExpenseExample()[0]
+    assert (expense.__str__() == "Expense(Garn,20,[1, 2],False)")

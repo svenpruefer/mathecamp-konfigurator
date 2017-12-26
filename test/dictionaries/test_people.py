@@ -25,14 +25,20 @@ def getHumanExample():
              "room": 42})
 
 
-def getParticipantExample():
-    return (Participant("Weihnachtsmann", "Der", date(1987, 8, 20), 300, False, "10a", 10, ["Programmieren"],
+def getParticipantExample(nameNo = 0):
+    if nameNo == 1:
+        name = ("Epunkt", "Jost")
+    elif nameNo == 2:
+        name = ("Marx", "Karl")
+    else:
+        name = ("Weihnachtsmann", "Der")
+    return (Participant(name[0], name[1], date(1987, 8, 20), 300, False, "10a", 10, ["Programmieren"],
                         ["test@musmehl.de"], ["test2@musmehl.de"], Gender.MALE, ["01112222222"], {}, 42,
                         "Karl-Liebknecht-Str.", "13", "86153", "Entenhausen", datetime(2018, 8, 19, 9, 30, 0),
                         TransportType.BUS, datetime(2018, 8, 27, 11, 30, 0), TransportType.PRIVATE, ["Uroma"],
                         [50, 62], ["Geige"], ["Kokain"], [FoodRestriction.CELIAC_DISEASE], ["Schnupfen"], False,
                         True, True, True, "Supercooler Typ!!!"),
-            {"familyName": "Weihnachtsmann", "givenName": "Der", "birthDate": date(1987, 8, 20),
+            {"familyName": name[0], "givenName": name[1], "birthDate": date(1987, 8, 20),
              "gender": Gender.MALE, "emailAddresses": ["test@musmehl.de"],
              "phoneNumbers": ["01112222222"], "street": "Karl-Liebknecht-Str.",
              "postalCode": "86153", "place": "Entenhausen", "streetNumber": "13",
@@ -51,13 +57,17 @@ def getParticipantExample():
              "sportsPermission": True})
 
 
-def getCounselorExample():
-    return (Counselor("Merkel", "Angela", date(1987, 8, 20), Gender.MALE, ["test@musmehl.de"], ["01112222222"],
+def getCounselorExample(nameNo = 0):
+    if nameNo == 1:
+        name = ("Man", "Iron")
+    else:
+        name = ("Merkel", "Angela")
+    return (Counselor(name[0], name[1], date(1987, 8, 20), Gender.MALE, ["test@musmehl.de"], ["01112222222"],
                       "Karl-Liebknecht-Str.", 13, "86153", "Entenhausen", datetime(2018, 8, 19, 9, 30, 0),
                       TransportType.BUS,
                       datetime(2018, 8, 27, 11, 30, 0), TransportType.PRIVATE, [FoodRestriction.CELIAC_DISEASE],
                       "Supercooler Typ!!!", 42, [8, 9]),
-            {"familyName": "Merkel", "givenName": "Angela", "birthDate": date(1987, 8, 20),
+            {"familyName": name[0], "givenName": name[1], "birthDate": date(1987, 8, 20),
              "gender": Gender.MALE, "emailAddresses": ["test@musmehl.de"],
              "phoneNumbers": ["01112222222"], "street": "Karl-Liebknecht-Str.",
              "postalCode": "86153", "place": "Entenhausen", "streetNumber": 13,

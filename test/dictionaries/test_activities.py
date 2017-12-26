@@ -5,10 +5,15 @@ from src.mktypes import Activity
 # Sample Cases #
 ################
 
-def getActivityExample():
-    return (Activity("Fußball", 2, [1, 2], [3], [1]),
-            {"name": "Fußball", "timeAndPlace": 2, "participants": [1, 2], "organizers": [3],
-             "expenses": [1]})
+def getActivityExample(nr=0):
+    if nr == 0:
+        return (Activity("Fußball", 2, [1, 2], [3], [1]),
+                {"name": "Fußball", "timeAndPlace": 2, "participants": [1, 2], "organizers": [3],
+                 "expenses": [1]})
+    else:
+        return (Activity("Free-Solo-Klettern", 3, [1, 2, 3, 5, 6, 4], [5, 6], [2]),
+                {"name": "Free-Solo-Klettern", "timeAndPlace": 3, "participants": [1, 2, 3, 5, 6, 4],
+                 "organizers": [5, 6], "expenses": [2]})
 
 
 #####################
