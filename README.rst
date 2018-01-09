@@ -24,7 +24,7 @@ You probably have already experienced the following problem: You suddenly want t
 summer camp for say high school students that are intereseted in mathematics. And then you notice that you don't
 know where to start and how to plan and organize such a large event. But don't be scared any longer:
 
- *Mathecamp-konfigurator to the rescue!*
+*mathecamp-konfigurator to the rescue!*
 
 This program incorporates ideas and experience gained during the planning and organization of the
 `Mathecamp Augsburg`_. It is easily customizable and is in fact also capable of organizing any other summer camp.
@@ -40,8 +40,7 @@ Features
 --------
 
 * (Planned) Overview over registered participants, guests and counselors
-* (Planned) Easy access to many common necessary functions such as producing tables of participants arriving by bus,
-counting registered people or printing a list of all registered email addresses
+* (Planned) Easy access to many common necessary functions such as producing tables of participants arriving by bus, counting registered people or printing a list of all registered email addresses
 * (Planned) Financial planning
 * (Planned) Scheduling
 * (Planned) GUI
