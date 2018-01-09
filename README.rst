@@ -21,27 +21,27 @@ mathecamp-konfigurator
 Mathecamp-konfigurator allows you to plan and organize your own Mathecamp.
 
 You probably have already experienced the following problem: You suddenly want to organize a new mathcamp, i.e. a
-    summer camp for say high school students that are intereseted in mathematics. And then you notice that you don't
-        know where to start and how to plan and organize such a large event. But don't be scared any longer:
+summer camp for say high school students that are intereseted in mathematics. And then you notice that you don't
+know where to start and how to plan and organize such a large event. But don't be scared any longer:
 
- *Mathecamp-konfigurator to the resuce!*
+ *Mathecamp-konfigurator to the rescue!*
 
- This program incorporates ideas and experience gained during the planning and organization of the
- [Mathecamp Augsburg](https://www.math.uni-augsburg.de/schueler/mathezirkel/). It is easily customizable and is in fact
-  also capable of organizing any other summer camp. All the data is saved in a way that makes it possible to access it
-   via other means, too, in case there is urgent need. Furthermore the GUI offers some easy ways to view and edit all
-    the information.
+This program incorporates ideas and experience gained during the planning and organization of the
+`Mathecamp Augsburg`_. It is easily customizable and is in fact also capable of organizing any other summer camp.
+All the data is saved in a way that makes it possible to access it via other means, too, in case there is urgent need.
+Furthermore the GUI offers some easy ways to view and edit all the information.
 
 * Free software: GNU General Public License v3
 * Documentation: https://mathecamp-konfigurator.readthedocs.io.
 
+.. _`Mathecamp Augsburg`: https://www.math.uni-augsburg.de/schueler/mathezirkel/
 
 Features
 --------
 
 * (Planned) Overview over registered participants, guests and counselors
 * (Planned) Easy access to many common necessary functions such as producing tables of participants arriving by bus,
- counting registered people or printing a list of all registered email addresses
+counting registered people or printing a list of all registered email addresses
 * (Planned) Financial planning
 * (Planned) Scheduling
 * (Planned) GUI
@@ -58,4 +58,6 @@ This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypack
 Impressum
 ---------
 
-You can find the authors website on [Musmehl](https://sven.musmehl.de).
+You can find the authors website on Musmehl_.
+
+.. _Musmehl: https://sven.musmehl.de
