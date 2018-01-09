@@ -6,7 +6,7 @@ from mathecamp_konfigurator.mktypes import Expense
 ################
 
 def getExpenseExample():
-    return (Expense("Garn", 20, [1, 2], False), {"name": "Garn", "amount": 20, "usage": [3, 8], "payedAlready": False})
+    return (Expense("Garn", 20, [1, 2], False), {"name": "Garn", "amount": 20, "usage": [1, 2], "payedAlready": False})
 
 
 #####################

@@ -7,7 +7,7 @@ from mathecamp_konfigurator.mktypes import Schedule
 ################
 
 def getScheduleExample():
-    return (Schedule([(1, 3, 4), (2, 3, 5)]),
+    return (Schedule([(1, 3, 4), (2, 4, 5)]),
             [{"mathCircleID": 1, "spaceTimeSlotID": 3, "teacherID": 4},
              {"mathCircleID": 2, "spaceTimeSlotID": 4, "teacherID": 5}])
 
@@ -36,4 +36,4 @@ def test_scheduleToDictAndFromDict():
 
 def test_schedulePrint():
     schedule = getScheduleExample()[0]
-    assert (schedule.__str__() == "Schedule([(1, 3, 4), (2, 3, 5)])")
+    assert (schedule.__str__() == "Schedule([(1, 3, 4), (2, 4, 5)])")
