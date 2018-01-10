@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 # This file defines the main class mathecamp
 
 ###########
@@ -168,7 +169,7 @@ class mathecamp():
     # </editor-fold>
 
     # <editor-fold desc="Helper methods">
-    def isDuringCamp(self, time: datetime):
+    def isDuringCamp(self, time):
         """
         returns a Boolean stating whether the given date time is during the Mathecamp or not
         :param time: datetime to check
