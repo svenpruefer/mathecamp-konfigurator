@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from datetime import time, date, datetime
 from mathecamp_konfigurator.mktypes import Room, Equipment, GeneralRoom, PrivateRoom, Gender, TransportType, FoodRestriction
 from mathecamp_konfigurator.people import Human, Participant, Counselor, Guest

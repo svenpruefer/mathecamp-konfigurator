@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from mathecamp_konfigurator.camp import mathecamp
 from tests.dictionaries.test_people import getCounselorExample, getParticipantExample, getGuestExample
 from datetime import datetime

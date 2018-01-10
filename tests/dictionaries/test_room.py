@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from datetime import time
 from mathecamp_konfigurator.mktypes import Room, Equipment, GeneralRoom, PrivateRoom
 

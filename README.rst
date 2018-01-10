@@ -13,7 +13,7 @@ mathecamp-konfigurator
         :target: https://mathecamp-konfigurator.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/svenpruefer/mathecamp_konfigurator/shield.svg
+.. image:: https://pyup.io/repos/github/svenpruefer/mathecamp-konfigurator/shield.svg
      :target: https://pyup.io/repos/github/svenpruefer/mathecamp-konfigurator/
      :alt: Updates
 

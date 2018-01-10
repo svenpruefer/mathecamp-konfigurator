@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from mathecamp_konfigurator.mktypes import Expense
 
 
