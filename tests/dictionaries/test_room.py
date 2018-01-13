@@ -13,21 +13,31 @@ def getRoomExample():
     return (Room("test"), {"name": "test"})
 
 
-def getGeneralRoomExample(nr=0):
+def getGeneralRoomExample(nr = 0):
     if nr == 0:
-        return (GeneralRoom("test", [Equipment.PIANO, Equipment.CANVAS]),
-                {"name": "test", "equipment": [Equipment.PIANO, Equipment.CANVAS]})
-    elif nr ==1:
-        return (GeneralRoom("Scheune", [Equipment.PIANO, Equipment.CANVAS]),
-                {"name": "Scheune", "equipment": [Equipment.PIANO, Equipment.CANVAS]})
+        return (GeneralRoom("test", [Equipment.PIANO, Equipment.WHITEBOARD]),
+                {"name": "test", "equipment": [Equipment.PIANO, Equipment.WHITEBOARD]})
+    elif nr == 1:
+        return (GeneralRoom("Scheune", [Equipment.BLACKBOARD]),
+                {"name": "Scheune", "equipment": [Equipment.BLACKBOARD]})
     else:
-        return (GeneralRoom("Mont Blanc", [Equipment.PIANO, Equipment.CANVAS]),
-                {"name": "Mont Blanc", "equipment": [Equipment.PIANO, Equipment.CANVAS]})
+        return (GeneralRoom("Mont Blanc", []),
+                {"name": "Mont Blanc", "equipment": []})
 
-def getPrivateRoomExample():
-    return (PrivateRoom("test", 17, [3, 7, 1], time(22, 0, 0), False),
-            {"name": "test", "capacity": 17, "inhabitants": [3, 7, 1],
-             "bedtime": time(22, 0, 0), "reservedForCounselors": False})
+
+def getPrivateRoomExample(nr = 0):
+    if nr == 0:
+        return (PrivateRoom("test", 4, [3, 4, 5], time(22, 0, 0), False),
+                {"name": "test", "capacity": 4, "inhabitants": [3, 4, 5],
+                 "bedtime": time(22, 0, 0), "reservedForCounselors": False})
+    elif nr == 1:
+        return (PrivateRoom("test", 2, [1, 2], None, True),
+                {"name": "test", "capacity": 2, "inhabitants": [1, 2],
+                 "bedtime": None, "reservedForCounselors": True})
+    else:
+        return (PrivateRoom("test", 4, [], None, False),
+                {"name": "test", "capacity": 4, "inhabitants": [],
+                 "bedtime": None, "reservedForCounselors": False})
 
 
 #####################
@@ -79,9 +89,9 @@ def test_roomPrint():
 
 def test_generalRoomPrint():
     generalRoom = getGeneralRoomExample()[0]
-    assert (generalRoom.__str__() == "GeneralRoom(test,[<Equipment.PIANO: 1>, <Equipment.CANVAS: 4>])")
+    assert (generalRoom.__str__() == "GeneralRoom(test,[<Equipment.PIANO: 1>, <Equipment.WHITEBOARD: 3>])")
 
 
 def test_privateRoomPrint():
     privateRoom = getPrivateRoomExample()[0]
-    assert (privateRoom.__str__() == "PrivateRoom(test,17,[3, 7, 1],22:00:00,False)")
+    assert (privateRoom.__str__() == "PrivateRoom(test,4,[3, 4, 5],22:00:00,False)")

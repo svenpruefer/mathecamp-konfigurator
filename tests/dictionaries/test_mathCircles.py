@@ -8,13 +8,13 @@ from mathecamp_konfigurator.mktypes import MathCircle
 # Sample Cases #
 ################
 
-def getMathCircleExample(nr=0):
+def getMathCircleExample(nr = 0):
     if (nr == 0):
-        return (MathCircle("10a", 10, [1, 2], 2, ["Symplektische Geometrie", "Motive"]),
-                {"name": "10a", "grade": 10, "members": [1, 2], "room": 2,
+        return (MathCircle("10a", 10, [3, 4], 2, ["Symplektische Geometrie", "Motive"]),
+                {"name": "10a", "grade": 10, "members": [3, 4], "room": 2,
                  "topics": ["Symplektische Geometrie", "Motive"]})
     else:
-        return (MathCircle("5c", 5, [3], 1, []), {"name": "5c", "grade": 5, "members": [3], "room": 1,
+        return (MathCircle("5c", 5, [5], 1, []), {"name": "5c", "grade": 5, "members": [5], "room": 1,
                                                   "topics": []})
 
 
@@ -42,4 +42,4 @@ def test_mathCircleToDictAndFromDict():
 
 def test_mathCirclePrint():
     mathCircle = getMathCircleExample()[0]
-    assert (mathCircle.__str__() == "MathCircle(10a,10,[1, 2],2,['Symplektische Geometrie', 'Motive'])")
+    assert (mathCircle.__str__() == "MathCircle(10a,10,[3, 4],2,['Symplektische Geometrie', 'Motive'])")

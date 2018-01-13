@@ -12,9 +12,9 @@ from mathecamp_konfigurator.mktypes import SpaceTimeSlot
 def getSpacetimeSlotExample(nr = 0):
     if nr == 0:
         return (SpaceTimeSlot(datetime(2018, 8, 22, 9, 0, 0), datetime(2018, 8, 22, 10, 30, 0), 1),
-            {"beginning": datetime(2018, 8, 22, 9, 0, 0),
-             "end": datetime(2018, 8, 22, 10, 30, 0),
-             "room": 1})
+                {"beginning": datetime(2018, 8, 22, 9, 0, 0),
+                 "end": datetime(2018, 8, 22, 10, 30, 0),
+                 "room": 1})
     elif nr == 1:
         return (SpaceTimeSlot(datetime(2018, 8, 23, 14, 0, 0), datetime(2018, 8, 23, 16, 30, 0), 2),
                 {"beginning": datetime(2018, 8, 23, 14, 0, 0),
