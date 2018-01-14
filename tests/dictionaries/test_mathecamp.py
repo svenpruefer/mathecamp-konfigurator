@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from mathecamp_konfigurator.camp import mathecamp
+from mathecamp_konfigurator.camp import Mathecamp
 from tests.dictionaries.test_people import getCounselorExample, getParticipantExample, getGuestExample
 from tests.dictionaries.test_room import getGeneralRoomExample, getPrivateRoomExample
 from tests.dictionaries.test_activities import getActivityExample
@@ -31,7 +31,7 @@ def getMathecampExample():
     spactimeSlots = {"1": getSpacetimeSlotExample(0)[0], "2": getSpacetimeSlotExample(1)[0],
                      "3": getSpacetimeSlotExample(2)[0], "4": getSpacetimeSlotExample(3)[0]}
     expenses = {"1": getExpenseExample()[0]}
-    schedule = getScheduleExample()[1]
+    schedule = getScheduleExample()
     nextHumanId = 7
     nextRoomId = 4
     nextActivityId = 3
@@ -40,10 +40,10 @@ def getMathecampExample():
     nextSpaceTimeSlotId = 4
     startTime = datetime(2018, 8, 18, 10, 0, 0)
     endTime = datetime(2018, 8, 26, 11, 30, 0)
-    
-    return ([mathecamp(startTime, endTime, nextHumanId, nextRoomId,
+
+    return ([Mathecamp(startTime, endTime, nextHumanId, nextRoomId,
                        nextActivityId, nextMathCircleId, nextExpenseId, nextSpaceTimeSlotId, generalRooms, privateRooms,
-                       activities, spactimeSlots, mathCircles, expenses, participants, counselors, guests, schedule),
+                       activities, spactimeSlots, mathCircles, expenses, participants, counselors, guests, schedule[0]),
              {
                  "generalData": {"startDate": startTime, "endDate": endTime, "nextHumanId": nextHumanId,
                                  "nextActivityId": nextActivityId, "nextRoomId": nextRoomId, "nextExpenseId":
@@ -57,7 +57,8 @@ def getMathecampExample():
                  "participants": {x: y.toDict() for (x, y) in participants.items()},
                  "counselors": {x: y.toDict() for (x, y) in counselors.items()},
                  "guests": {x: y.toDict() for (x, y) in guests.items()},
-                 "spacetimeSlots": {x: y.toDict() for (x, y) in spactimeSlots.items()}
+                 "spacetimeSlots": {x: y.toDict() for (x, y) in spactimeSlots.items()},
+                 "schedule": schedule[1]
              }])
 
 
@@ -74,20 +75,66 @@ def test_mathecampConstructorAndToDict():
 # Dictionary tests #
 ####################
 
-@pytest.mark.skip(reason = "mathecamp.fromDict not implemented yet")
 def test_mathecampToDictAndFromDict():
     mathecampDictionary = getMathecampExample()[1]
-    assert (mathecamp.fromDict(mathecampDictionary).toDict() == mathecampDictionary)
+    assert (Mathecamp.fromDict(mathecampDictionary).toDict() == mathecampDictionary)
 
 
 ###############
 # Print tests #
 ###############
 
-@pytest.mark.skip(reason = "result still needs to be determined")
 def test_mathecampPrint():
-    mathecamp = getMathecampExample()
-    assert (mathecamp.__str__() == "")
+    mathecamp = getMathecampExample()[0]
+    print(mathecamp)
+    assert (mathecamp.__str__() == "Mathecamp(2018-08-18 10:00:00, 2018-08-26 11:30:00,"
+                                   " 7, 4, 3, 3, 2, 4, "
+                                   "{'1': 'GeneralRoom(test,[<Equipment.PIANO: 1>, <Equipment.WHITEBOARD: 3>])', "
+                                   "'2': 'GeneralRoom(Scheune,[<Equipment.BLACKBOARD: 2>])', "
+                                   "'3': 'GeneralRoom(Mont Blanc,[])'}, "
+                                   "{'4': 'PrivateRoom(test,4,[3, 4, 5],22:00:00,False)', "
+                                   "'5': 'PrivateRoom(test,2,[1, 2],None,True)', "
+                                   "'6': 'PrivateRoom(test,4,[],None,False)'}, "
+                                   "{'1': 'Activity(Fußball,2,[1, 2],[3],[1])', "
+                                   "'2': 'Activity(Free-Solo-Klettern,3,[1, 2, 3, 5, 6, 4],[5, 6],[2])'}, "
+                                   "{'1': 'SpaceTimeSlot([2018-08-22 09:00:00,2018-08-22 10:30:00],1)', "
+                                   "'2': 'SpaceTimeSlot([2018-08-23 14:00:00,2018-08-23 16:30:00],2)', "
+                                   "'3': 'SpaceTimeSlot([2018-08-23 14:30:00,2018-08-23 18:00:00],3)', "
+                                   "'4': 'SpaceTimeSlot([2018-08-22 09:00:00,2018-08-22 10:30:00],2)'}, "
+                                   "{'1': \"MathCircle(10a,10,[3, 4],2,['Symplektische Geometrie', 'Motive'])\", "
+                                   "'2': 'MathCircle(5c,5,[5],1,[])'}, "
+                                   "{'1': 'Expense(Garn,20,[1, 2],False)'}, "
+                                   "{'3': \"Participant(Weihnachtsmann,Der,1987-08-20,Gender.MALE,['test@musmehl.de'],"
+                                   "['01112222222'],Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,"
+                                   "TransportType.BUS,2018-08-27 11:30:00,TransportType.PRIVATE,"
+                                   "[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,42, 300, False, 10a, 10, "
+                                   "['Programmieren'], ['test2@musmehl.de'], {}, ['Uroma'], [50, 62], ['Geige'], "
+                                   "['Kokain'], ['Schnupfen'], False, True, True, True)\", "
+                                   "'4': \"Participant(Epunkt,Jost,1987-08-20,Gender.MALE,['test@musmehl.de'],"
+                                   "['01112222222'],Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,"
+                                   "TransportType.BUS,2018-08-27 11:30:00,TransportType.PRIVATE,"
+                                   "[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,42, 300, False, 10a, 10, "
+                                   "['Programmieren'], ['test2@musmehl.de'], {}, ['Uroma'], [50, 62], ['Geige'], "
+                                   "['Kokain'], ['Schnupfen'], False, True, True, True)\", "
+                                   "'5': \"Participant(Marx,Karl,1987-08-20,Gender.MALE,['test@musmehl.de'],"
+                                   "['01112222222'],Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,"
+                                   "TransportType.BUS,2018-08-27 11:30:00,TransportType.PRIVATE,"
+                                   "[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,42, 300, False, 10a, 10, "
+                                   "['Programmieren'], ['test2@musmehl.de'], {}, ['Uroma'], [50, 62], ['Geige'], "
+                                   "['Kokain'], ['Schnupfen'], False, True, True, True)\"}, "
+                                   "{'1': \"Counselor(Merkel,Angela,1987-08-20,Gender.MALE,['test@musmehl.de'],"
+                                   "['01112222222'],Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,"
+                                   "TransportType.BUS,2018-08-27 11:30:00,TransportType.PRIVATE,"
+                                   "[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,42, [8, 9])\", "
+                                   "'2': \"Counselor(Man,Iron,1987-08-20,Gender.MALE,['test@musmehl.de'],"
+                                   "['01112222222'],Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,"
+                                   "TransportType.BUS,2018-08-27 11:30:00,TransportType.PRIVATE,"
+                                   "[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,42, [8, 9])\"}, "
+                                   "{'6': \"Guest(Bombadil,Tom,1987-08-20,Gender.MALE,['test@musmehl.de'],"
+                                   "['01112222222'],Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,"
+                                   "TransportType.BUS,2018-08-27 11:30:00,TransportType.PRIVATE,"
+                                   "[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,42)\"}, "
+                                   "Schedule([(1, 3, 1), (2, 4, 2)]))")
 
 #######################
 # Adding methods test #
