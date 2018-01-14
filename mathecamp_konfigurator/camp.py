@@ -10,6 +10,7 @@ __docformat__ = 'reStructuredText'
 ###########
 from datetime import *
 from mathecamp_konfigurator.people import *
+from sortedcontainers import SortedDict, SortedList
 
 
 #############
@@ -52,39 +53,39 @@ class Mathecamp():
         """
 
         if guests is None:
-            guests = {}
+            guests = SortedDict({})
         if counselors is None:
-            counselors = {}
+            counselors = SortedDict({})
         if participants is None:
-            participants = {}
+            participants = SortedDict({})
         if expenses is None:
-            expenses = {}
+            expenses = SortedDict({})
         if mathCircles is None:
-            mathCircles = {}
+            mathCircles = SortedDict({})
         if activities is None:
-            activities = {}
+            activities = SortedDict({})
         if spacetimeSlots is None:
-            spacetimeSlots = {}
+            spacetimeSlots = SortedDict({})
         if generalRooms is None:
-            generalRooms = {}
+            generalRooms = SortedDict({})
         if privateRooms is None:
-            privateRooms = {}
+            privateRooms = SortedDict({})
         if schedule is None:
-            schedule = Schedule([])
+            schedule = Schedule(SortedList([]))
 
-        self.dates = {"start": startDate, "end": endDate}
-        self.nextIds = {"Human": nextHumanId, "Room": nextRoomId, "Activity": nextActivityId,
-                        "MathCircle": nextMathCircleId, "Expense": nextExpenseId, "SpaceTimeSlot": nextSpaceTimeSlotId}
-        self.generalRooms = generalRooms
-        self.privateRooms = privateRooms
-        self.activities = activities
-        self.mathCircles = mathCircles
-        self.expenses = expenses
-        self.participants = participants
-        self.counselors = counselors
-        self.guests = guests
+        self.dates = SortedDict({"start": startDate, "end": endDate})
+        self.nextIds = SortedDict({"Human": nextHumanId, "Room": nextRoomId, "Activity": nextActivityId,
+                        "MathCircle": nextMathCircleId, "Expense": nextExpenseId, "SpaceTimeSlot": nextSpaceTimeSlotId})
+        self.generalRooms = SortedDict(generalRooms)
+        self.privateRooms = SortedDict(privateRooms)
+        self.activities = SortedDict(activities)
+        self.mathCircles = SortedDict(mathCircles)
+        self.expenses = SortedDict(expenses)
+        self.participants = SortedDict(participants)
+        self.counselors = SortedDict(counselors)
+        self.guests = SortedDict(guests)
         self.schedule = schedule
-        self.spacetimeSlots = spacetimeSlots
+        self.spacetimeSlots = SortedDict(spacetimeSlots)
 
     # </editor-fold>
 
@@ -99,16 +100,16 @@ class Mathecamp():
         as keys and dictionaries with their respective data as values
         """
 
-        generalDataDict = {}
-        privateRoomDict = {}
-        generalRoomDict = {}
-        activityDict = {}
-        mathCircleDict = {}
-        expenseDict = {}
-        participantDict = {}
-        counselorDict = {}
-        guestDict = {}
-        spacetimeSlotDict = {}
+        generalDataDict = SortedDict({})
+        privateRoomDict = SortedDict({})
+        generalRoomDict = SortedDict({})
+        activityDict = SortedDict({})
+        mathCircleDict = SortedDict({})
+        expenseDict = SortedDict({})
+        participantDict = SortedDict({})
+        counselorDict = SortedDict({})
+        guestDict = SortedDict({})
+        spacetimeSlotDict = SortedDict({})
 
         generalDataDict["startDate"] = self.dates["start"]
         generalDataDict["endDate"] = self.dates["end"]
@@ -120,33 +121,33 @@ class Mathecamp():
         generalDataDict["nextMathCircleId"] = self.nextIds["MathCircle"]
 
         for (k, v) in self.generalRooms.items():
-            generalRoomDict[k] = v.toDict()
+            generalRoomDict[k] = SortedDict(v.toDict())
 
         for (k, v) in self.privateRooms.items():
-            privateRoomDict[k] = v.toDict()
+            privateRoomDict[k] = SortedDict(v.toDict())
 
         for (k, v) in self.activities.items():
-            activityDict[k] = v.toDict()
+            activityDict[k] = SortedDict(v.toDict())
 
         for (k, v) in self.mathCircles.items():
-            mathCircleDict[k] = v.toDict()
+            mathCircleDict[k] = SortedDict(v.toDict())
 
         for (k, v) in self.expenses.items():
-            expenseDict[k] = v.toDict()
+            expenseDict[k] = SortedDict(v.toDict())
 
         for (k, v) in self.participants.items():
-            participantDict[k] = v.toDict()
+            participantDict[k] = SortedDict(v.toDict())
 
         for (k, v) in self.counselors.items():
-            counselorDict[k] = v.toDict()
+            counselorDict[k] = SortedDict(v.toDict())
 
         for (k, v) in self.guests.items():
-            guestDict[k] = v.toDict()
+            guestDict[k] = SortedDict(v.toDict())
 
         for (k, v) in self.spacetimeSlots.items():
-            spacetimeSlotDict[k] = v.toDict()
+            spacetimeSlotDict[k] = SortedDict(v.toDict())
 
-        return ({
+        return (SortedDict({
             "generalData": generalDataDict,
             "generalRooms": generalRoomDict,
             "privateRooms": privateRoomDict,
@@ -158,7 +159,7 @@ class Mathecamp():
             "guests": guestDict,
             "spacetimeSlots": spacetimeSlotDict,
             "schedule": self.schedule.toDict()
-        })
+        }))
 
     @classmethod
     def fromDict(cls, dictionary):
