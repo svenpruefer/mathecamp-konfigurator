@@ -204,15 +204,15 @@ class Mathecamp():
             self.nextIds["MathCircle"].__str__() + ", " +
             self.nextIds["Expense"].__str__() + ", " +
             self.nextIds["SpaceTimeSlot"].__str__() + ", " +
-            {k.__str__(): v.__str__() for (k, v) in self.generalRooms.items()}.__str__() + ", " +
-            {k.__str__(): v.__str__() for (k, v) in self.privateRooms.items()}.__str__() + ", " +
-            {k.__str__(): v.__str__() for (k, v) in self.activities.items()}.__str__() + ", " +
-            {k.__str__(): v.__str__() for (k, v) in self.spacetimeSlots.items()}.__str__() + ", " +
-            {k.__str__(): v.__str__() for (k, v) in self.mathCircles.items()}.__str__() + ", " +
-            {k.__str__(): v.__str__() for (k, v) in self.expenses.items()}.__str__() + ", " +
-            {k.__str__(): v.__str__() for (k, v) in self.participants.items()}.__str__() + ", " +
-            {k.__str__(): v.__str__() for (k, v) in self.counselors.items()}.__str__() + ", " +
-            {k.__str__(): v.__str__() for (k, v) in self.guests.items()}.__str__() + ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.generalRooms.items()}).__str__()[11:-1] + ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.privateRooms.items()}).__str__() [11:-1]+ ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.activities.items()}).__str__() [11:-1]+ ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.spacetimeSlots.items()}).__str__() [11:-1]+ ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.mathCircles.items()}).__str__() [11:-1]+ ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.expenses.items()}).__str__() [11:-1]+ ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.participants.items()}).__str__() [11:-1]+ ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.counselors.items()}).__str__() [11:-1]+ ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.guests.items()}).__str__() [11:-1]+ ", " +
             self.schedule.__str__() + ")"
         )
 

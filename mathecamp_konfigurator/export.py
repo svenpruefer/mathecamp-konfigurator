@@ -8,6 +8,7 @@
 ###########
 
 from mathecamp_konfigurator.camp import Mathecamp
+import csv
 
 ######
 # IO #
@@ -19,4 +20,41 @@ class IO:
     """
 
     def __init__(self, directory):
+        """
+        Main constructor of an IO class instance.
+        :param directory: the working directory used for importing and exporting as a string
+        """
+        self.path = directory
+
+    def writeDictToFile(self, filename, dictionary):
+        """
+
+        :param filename:
+        :param dictionary:
+        :return:
+        """
+        pass
+
+    def readDictFromFile(self, filename):
+        """
+
+        :param filename:
+        :return:
+        """
+        pass
+
+    def writeMathecampToFiles(self, mathecamp):
+        """
+
+        :param mathecamp:
+        :return:
+        """
+        pass
+
+    def readMathecampFromFiles(self, mathecamp):
+        """
+
+        :param mathecamp:
+        :return:
+        """
         pass
