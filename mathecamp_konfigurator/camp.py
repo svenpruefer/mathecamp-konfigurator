@@ -11,6 +11,7 @@ __docformat__ = 'reStructuredText'
 from datetime import *
 from mathecamp_konfigurator.people import *
 from sortedcontainers import SortedDict, SortedList
+from dateutil.parser import parse
 
 
 #############
@@ -75,7 +76,8 @@ class Mathecamp():
 
         self.dates = SortedDict({"start": startDate, "end": endDate})
         self.nextIds = SortedDict({"Human": nextHumanId, "Room": nextRoomId, "Activity": nextActivityId,
-                        "MathCircle": nextMathCircleId, "Expense": nextExpenseId, "SpaceTimeSlot": nextSpaceTimeSlotId})
+                                   "MathCircle": nextMathCircleId, "Expense": nextExpenseId,
+                                   "SpaceTimeSlot": nextSpaceTimeSlotId})
         self.generalRooms = SortedDict(generalRooms)
         self.privateRooms = SortedDict(privateRooms)
         self.activities = SortedDict(activities)
@@ -190,6 +192,35 @@ class Mathecamp():
             Schedule.fromDict(dictionary["schedule"])
         ))
 
+    @classmethod
+    def fromDictOfStrings(cls, dictionary):
+        """
+        creates a Mathecmap instance from a dictionary of strings as is created by deserializing csv tables
+
+        :param dictionary: the dictionary to parse
+        :return: a new instance of a Mathecamp
+        """
+
+        return (Mathecamp(
+            datetime.strptime(dictionary["generalData"]["startDate"]),
+            datetime.strptime(dictionary["generalData"]["endDate"]),
+            int(dictionary["generalData"]["nextHumanId"]),
+            int(dictionary["generalData"]["nextRoomId"]),
+            int(dictionary["generalData"]["nextActivityId"]),
+            int(dictionary["generalData"]["nextMathCircleId"]),
+            int(dictionary["generalData"]["nextExpenseId"]),
+            int(dictionary["generalData"]["nextSpaceTimeSlotId"]),
+            {k: GeneralRoom.fromDictOfStrings(v) for (k, v) in dictionary["generalRooms"].items()},
+            {k: PrivateRoom.fromDictOfStrings(v) for (k, v) in dictionary["privateRooms"].items()},
+            {k: Activity.fromDictOfStrings(v) for (k, v) in dictionary["activities"].items()},
+            {k: SpaceTimeSlot.fromDictOfStrings(v) for (k, v) in dictionary["spacetimeSlots"].items()},
+            {k: MathCircle.fromDictOfStrings(v) for (k, v) in dictionary["mathCircles"].items()},
+            {k: Expense.fromDictOfStrings(v) for (k, v) in dictionary["expenses"].items()},
+            {k: Participant.fromDictOfStrings(v) for (k, v) in dictionary["participants"].items()},
+            {k: Counselor.fromDictOfStrings(v) for (k, v) in dictionary["counselors"].items()},
+            {k: Guest.fromDictOfStrings(v) for (k, v) in dictionary["guests"].items()},
+            Schedule.fromDictOfStrings(dictionary["schedule"])))
+
     # </editor-fold>
 
     # <editor-fold desc="Helper methods">
@@ -205,14 +236,14 @@ class Mathecamp():
             self.nextIds["Expense"].__str__() + ", " +
             self.nextIds["SpaceTimeSlot"].__str__() + ", " +
             SortedDict({k.__str__(): v.__str__() for (k, v) in self.generalRooms.items()}).__str__()[11:-1] + ", " +
-            SortedDict({k.__str__(): v.__str__() for (k, v) in self.privateRooms.items()}).__str__() [11:-1]+ ", " +
-            SortedDict({k.__str__(): v.__str__() for (k, v) in self.activities.items()}).__str__() [11:-1]+ ", " +
-            SortedDict({k.__str__(): v.__str__() for (k, v) in self.spacetimeSlots.items()}).__str__() [11:-1]+ ", " +
-            SortedDict({k.__str__(): v.__str__() for (k, v) in self.mathCircles.items()}).__str__() [11:-1]+ ", " +
-            SortedDict({k.__str__(): v.__str__() for (k, v) in self.expenses.items()}).__str__() [11:-1]+ ", " +
-            SortedDict({k.__str__(): v.__str__() for (k, v) in self.participants.items()}).__str__() [11:-1]+ ", " +
-            SortedDict({k.__str__(): v.__str__() for (k, v) in self.counselors.items()}).__str__() [11:-1]+ ", " +
-            SortedDict({k.__str__(): v.__str__() for (k, v) in self.guests.items()}).__str__() [11:-1]+ ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.privateRooms.items()}).__str__()[11:-1] + ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.activities.items()}).__str__()[11:-1] + ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.spacetimeSlots.items()}).__str__()[11:-1] + ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.mathCircles.items()}).__str__()[11:-1] + ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.expenses.items()}).__str__()[11:-1] + ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.participants.items()}).__str__()[11:-1] + ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.counselors.items()}).__str__()[11:-1] + ", " +
+            SortedDict({k.__str__(): v.__str__() for (k, v) in self.guests.items()}).__str__()[11:-1] + ", " +
             self.schedule.__str__() + ")"
         )
 

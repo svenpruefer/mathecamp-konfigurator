@@ -115,6 +115,30 @@ class Human:
                       dictionary["departureTime"], dictionary["departureType"], dictionary["foodRestrictions"],
                       dictionary["miscellaneous"], dictionary["room"]))
 
+    @classmethod
+    def fromDictOfStrings(cls, dictionary):
+        """
+        creates a participant instance from a dictionary, inverse to 'toDict'
+        :return: an instance of a participant
+        """
+        return (Human(dictionary["familyName"],
+                      dictionary["givenName"],
+                      date.fromtimestamp(dictionary["birthDate"]),
+                      ast.literal_eval(dictionary["emailAddresses"]),
+                      Gender.fromString(dictionary["gender"]),
+                      ast.literal_eval(dictionary["phoneNumbers"]),
+                      dictionary["street"],
+                      dictionary["streetNumber"],
+                      dictionary["postalCode"],
+                      dictionary["place"],
+                      datetime.strptime(dictionary["arrivalTime"]),
+                      TransportType.fromString(dictionary["arrivalType"]),
+                      datetime.strptime(dictionary["departureTime"]),
+                      TransportType.fromString(dictionary["departureType"]),
+                      [FoodRestriction.fromString(x) for x in ast.literal_eval(dictionary["foodRestrictions"])],
+                      dictionary["miscellaneous"],
+                      int(dictionary["room"])))
+
 
 ###############
 # Participant #
@@ -267,6 +291,46 @@ class Participant(Human):
                             dictionary["leavingPermission"],
                             dictionary["sportsPermission"], dictionary["miscellaneous"]))
 
+    @classmethod
+    def fromDictOfStrings(cls, dictionary):
+        """
+        creates a participant instance from a dictionary, inverse to 'toDict'
+        :return: an instance of a participant
+        """
+        return (Participant(dictionary["familyName"],
+                            dictionary["givenName"],
+                            date.fromtimestamp(dictionary["birthDate"]),
+                            int(dictionary["campPrice"]),
+                            ast.literal_eval(dictionary["moneyPayedAlready"]),
+                            dictionary["circle"],
+                            int(dictionary["grade"]),
+                            ast.literal_eval(dictionary["topicWishes"]),
+                            ast.literal_eval(dictionary["emailAddresses"]),
+                            ast.literal_eval(dictionary["emailAddressesParents"]),
+                            Gender.fromString(dictionary["gender"]),
+                            ast.literal_eval(dictionary["phoneNumbers"]),
+                            ast.literal_eval(dictionary["phoneNumbersEmergency"]),
+                            int(dictionary["room"]),
+                            dictionary["street"],
+                            dictionary["streetNumber"],
+                            dictionary["postalCode"],
+                            dictionary["place"],
+                            datetime.strptime(dictionary["arrivalTime"]),
+                            TransportType.fromString(dictionary["arrivalType"]),
+                            datetime.strptime(dictionary["departureTime"]),
+                            TransportType.fromString(dictionary["departureType"]),
+                            dictionary["departureOtherPerson"],
+                            ast.literal_eval(dictionary["friends"]),
+                            ast.literal_eval(dictionary["instrument"]),
+                            ast.literal_eval(dictionary["medicalDrugs"]),
+                            [FoodRestriction.fromString(x) for x in ast.literal_eval(dictionary["foodRestrictions"])],
+                            ast.literal_eval(dictionary["illness"]),
+                            ast.literal_eval(dictionary["rideSharing"]),
+                            ast.literal_eval(dictionary["swimmingPermission"]),
+                            ast.literal_eval(dictionary["leavingPermission"]),
+                            ast.literal_eval(dictionary["sportsPermission"]),
+                            dictionary["miscellaneous"]))
+
 
 #############
 # Counselor #
@@ -347,6 +411,32 @@ class Counselor(Human):
                           dictionary["departureTime"], dictionary["departureType"], dictionary["foodRestrictions"],
                           dictionary["miscellaneous"], dictionary["room"], dictionary["preferredGrades"]))
 
+    @classmethod
+    def fromDictOfStrings(cls, dictionary):
+        """
+        creates a counselor instance from a dictionary, inverse to 'toDict'
+
+        :return: an instance of a counselor
+        """
+        return (Counselor(dictionary["familyName"],
+                          dictionary["givenName"],
+                          date.fromtimestamp(dictionary["birthDate"]),
+                          ast.literal_eval(dictionary["emailAddresses"]),
+                          Gender.fromString(dictionary["gender"]),
+                          ast.literal_eval(dictionary["phoneNumbers"]),
+                          dictionary["street"],
+                          dictionary["streetNumber"],
+                          dictionary["postalCode"],
+                          dictionary["place"],
+                          datetime.strptime(dictionary["arrivalTime"]),
+                          TransportType.fromString(dictionary["arrivalType"]),
+                          datetime.strptime(dictionary["departureTime"]),
+                          TransportType.fromString(dictionary["departureType"]),
+                          [FoodRestriction.fromString(x) for x in ast.literal_eval(dictionary["foodRestrictions"])],
+                          dictionary["miscellaneous"],
+                          int(dictionary["room"]),
+                          ast.literal_eval(dictionary["prefferedGrades"])))
+
 
 #########
 # Guest #
@@ -418,3 +508,28 @@ class Guest(Human):
                       dictionary["arrivalType"],
                       dictionary["departureTime"], dictionary["departureType"], dictionary["foodRestrictions"],
                       dictionary["miscellaneous"], dictionary["room"]))
+
+    @classmethod
+    def fromDictOfStrings(cls, dictionary):
+        """
+        creates a guest instance from a dictionary, inverse to 'toDict'
+
+        :return: an instance of a guest
+        """
+        return (Guest(dictionary["familyName"],
+                      dictionary["givenName"],
+                      date.fromtimestamp(dictionary["birthDate"]),
+                      ast.literal_eval(dictionary["emailAddresses"]),
+                      Gender.fromString(dictionary["gender"]),
+                      ast.literal_eval(dictionary["phoneNumbers"]),
+                      dictionary["street"],
+                      dictionary["streetNumber"],
+                      dictionary["postalCode"],
+                      dictionary["place"],
+                      datetime.strptime(dictionary["arrivalTime"]),
+                      TransportType.fromString(dictionary["arrivalType"]),
+                      datetime.strptime(dictionary["departureTime"]),
+                      TransportType.fromString(dictionary["departureType"]),
+                      [FoodRestriction.fromString(x) for x in ast.literal_eval(dictionary["foodRestrictions"])],
+                      dictionary["miscellaneous"],
+                      int(dictionary["room"])))
