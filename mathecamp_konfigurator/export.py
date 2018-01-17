@@ -10,7 +10,7 @@
 from mathecamp_konfigurator.camp import Mathecamp
 import csv
 import codecs
-from sortedcontainers import SortedDict
+from sortedcontainers import SortedDict, SortedList
 
 
 ######
@@ -21,34 +21,39 @@ class IO:
     """
     Implements methods for exporting and importing Mathecamp instances to a specified folder.
     """
-    
+
     def __init__(self, directory):
         """
         Main constructor of an IO class instance.
         :param directory: the working directory used for importing and exporting as a string
         """
         self.path = directory
-    
-    def writeDictToFile(self, filename, dictionary, columnNames):
+
+    def writeDictToFile(self, filename, dictionary):
         """
 
         :param filename:
         :param dictionary: a dictionary of the type 'Id : SortedDict'
-        :param columnNames: a list of column names besides Id for the keys of the dictionary
         :return:
         """
+        if dictionary == {}:
+            return True # TODO Should there be an empty file instead of none?
+        firstKey = dictionary.keys()[0]
+        columnNames = SortedList(dictionary[firstKey].keys())
         try:
-            with codecs.open(self.path + filename, 'wb', 'utf-8-sig') as fileToWrite:
-                csvFileWriter = csv.DictWriter(fileToWrite, fieldnames = ['Id'].append(columnNames), delimiter = ';')
-                
+            with open(filename, 'a', encoding = 'utf-8-sig') as fileToWrite:
+                csvFileWriter = csv.DictWriter(fileToWrite, fieldnames = columnNames + ['Id'], delimiter = ';')
+
                 csvFileWriter.writeheader()
                 for (k,v) in dictionary.items():
-                    csvFileWriter.writerow({'Id' : k}.update({l : v[l] for l in columnNames}))
+                    csvFileWriter.writerow(dict({'Id' : k}, **{l : v[l] for l in columnNames}))
+                    print("Wrote something")
         except Exception as e:
+            print(e)
             return e
         else:
             return True
-    
+
     def readDictFromFile(self, filename):
         """
 
@@ -66,15 +71,19 @@ class IO:
             return e
         else:
             return (result)
-    
+
     def writeMathecampToFiles(self, mathecamp):
         """
 
         :param mathecamp:
         :return:
         """
-        pass
-    
+        dictionaryToWrite = mathecamp.toDict()
+
+        for dictName in dictionaryToWrite.keys():
+            if dictName != "generalData" and dictName != "schedule" and dictionaryToWrite[dictName] != {}:
+                self.writeDictToFile(dictName + ".csv",dictionaryToWrite[dictName])
+
     def readMathecampFromFiles(self, mathecamp):
         """
 

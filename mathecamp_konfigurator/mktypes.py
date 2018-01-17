@@ -413,7 +413,7 @@ class PrivateRoom(Room):
     This class represents a private room for sleeping
     """
 
-    def __init__(self, name="", capacity=0, inhabitants=None, bedtime=time.max, reservedForCounselors=False):
+    def __init__(self, name="", capacity=0, inhabitants=None, bedtime=None, reservedForCounselors=False):
         """
         The main constructor of a private room
         :param name: the name of the room as a string
