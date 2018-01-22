@@ -1,5 +1,0 @@
-﻿Id;bedtime;capacity;inhabitants;name;reservedForCounselors
-Id;bedtime;capacity;inhabitants;name;reservedForCounselors
-4;22:00:00;4;[3, 4, 5];test;False
-5;;2;[1, 2];test;True
-6;;4;[];test;False

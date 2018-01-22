@@ -47,7 +47,6 @@ class IO:
                 csvFileWriter.writeheader()
                 for (k,v) in dictionary.items():
                     csvFileWriter.writerow(dict({'Id' : k}, **{l : v[l] for l in columnNames}))
-                    print("Wrote something")
         except Exception as e:
             print(e)
             return e
