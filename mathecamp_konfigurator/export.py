@@ -9,7 +9,7 @@
 
 from mathecamp_konfigurator.camp import Mathecamp
 import csv
-import codecs
+import os
 from sortedcontainers import SortedDict, SortedList
 
 
@@ -41,7 +41,7 @@ class IO:
         firstKey = dictionary.keys()[0]
         columnNames = SortedList(dictionary[firstKey].keys())
         try:
-            with open(filename, 'a', encoding = 'utf-8-sig') as fileToWrite:
+            with open(filename, 'w', encoding = 'utf-8-sig') as fileToWrite:
                 csvFileWriter = csv.DictWriter(fileToWrite, fieldnames = columnNames + ['Id'], delimiter = ';')
 
                 csvFileWriter.writeheader()
@@ -83,10 +83,17 @@ class IO:
             if dictName != "generalData" and dictName != "schedule" and dictionaryToWrite[dictName] != {}:
                 self.writeDictToFile(dictName + ".csv",dictionaryToWrite[dictName])
 
-    def readMathecampFromFiles(self, mathecamp):
+    def readMathecampFromFiles(self):
         """
 
-        :param mathecamp:
-        :return:
+        :return: an instance of a Mathecamp
         """
+        # TODO Implement this next!
         pass
+
+    def cleanDirectory(self):
+        for file in os.listdir(self.path):
+            try:
+                os.remove(file)
+            except Exception:
+                os.rmdir(file)

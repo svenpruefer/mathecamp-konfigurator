@@ -3,6 +3,7 @@
 
 from tests.dictionaries.test_mathecamp import getMathecampExample
 from mathecamp_konfigurator.export import IO
+from mathecamp_konfigurator.mktypes import FoodRestriction
 
 def test_writeMathecampToFile():
     mathecamp = getMathecampExample()[0]
@@ -10,4 +11,8 @@ def test_writeMathecampToFile():
     testIO = IO("~/")
 
     testIO.writeMathecampToFiles(mathecamp)
-    assert(True)
+    parsedMathecamp = testIO.readMathecampFromFiles()
+
+    assert(parsedMathecamp == mathecamp)
+    testIO.cleanDirectory()
+

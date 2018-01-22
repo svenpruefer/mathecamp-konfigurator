@@ -31,6 +31,12 @@ class Gender(Enum):
         }
         return (conversion[string])
 
+    def __str__(self):
+        return ("Gender." + self.name.__str__())
+
+    def __repr__(self):
+        return (self.__str__())
+
 
 class Occupation(Enum):
     COUNSELOR = 1
@@ -45,6 +51,12 @@ class Occupation(Enum):
             "Occupation.Guest": Occupation.GUEST
         }
         return (conversion[string])
+
+    def __str__(self):
+        return ("Occupation." + self.name.__str__())
+
+    def __repr__(self):
+        return (self.__str__())
 
 
 class FoodRestriction(Enum):
@@ -71,6 +83,12 @@ class FoodRestriction(Enum):
         }
         return (conversion[string])
 
+    def __str__(self):
+        return ("FoodRestriction." + self.name.__str__())
+
+    def __repr__(self):
+        return (self.__str__())
+
 
 class TransportType(Enum):
     BUS = 1
@@ -80,11 +98,17 @@ class TransportType(Enum):
     @classmethod
     def fromString(cls, string):
         conversion = {
-            "FoodRestriction.BUS": TransportType.BUS,
-            "FoodRestriction.PRIVATE": TransportType.PRIVATE,
-            "FoodRestriction.SELF": TransportType.SELF
+            "TransportType.BUS": TransportType.BUS,
+            "TransportType.PRIVATE": TransportType.PRIVATE,
+            "TransportType.SELF": TransportType.SELF
         }
         return (conversion[string])
+
+    def __str__(self):
+        return ("TransportType." + self.name.__str__())
+
+    def __repr__(self):
+        return (self.__str__())
 
 
 class Equipment(Enum):
@@ -102,6 +126,12 @@ class Equipment(Enum):
             "Equipment.CANVAS": Equipment.CANVAS
         }
         return (conversion.get[string])
+
+    def __str__(self):
+        return ("Equipment." + self.name.__str__())
+
+    def __repr__(self):
+        return (self.__str__())
 
 
 # </editor-fold>
