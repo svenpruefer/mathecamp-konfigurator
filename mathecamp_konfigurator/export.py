@@ -88,7 +88,7 @@ class IO:
 
         :return: an instance of a Mathecamp
         """
-        # TODO Implement this next!
+        # TODO Implement this
         pass
 
     def cleanDirectory(self):

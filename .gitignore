@@ -105,3 +105,4 @@ ENV/
 
 # test files
 tests/IO/*.csv
+.pytest_cache/

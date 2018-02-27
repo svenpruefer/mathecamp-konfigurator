@@ -157,14 +157,14 @@ def test_humanPrint():
     assert (
         human.__str__() == "Human(Ferdinand,Karl,1987-08-20,Gender.MALE,['test@musmehl.de'],['01112222222'],"
         + "Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,TransportType.BUS,2018-08-27 11:30:00,"
-        + "TransportType.PRIVATE,[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,42)")
+        + "TransportType.PRIVATE,[FoodRestriction.CELIAC_DISEASE],Supercooler Typ!!!,42)")
 
 
 def test_participantPrint():
     participant = getParticipantExample()[0]
     assert (participant.__str__() == "Participant(Weihnachtsmann,Der,1987-08-20,Gender.MALE,['test@musmehl.de'],"
             + "['01112222222'],Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,TransportType.BUS,"
-            + "2018-08-27 11:30:00,TransportType.PRIVATE,[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,"
+            + "2018-08-27 11:30:00,TransportType.PRIVATE,[FoodRestriction.CELIAC_DISEASE],Supercooler Typ!!!,"
             + "42, 300, False, 10a, 10, ['Programmieren'], ['test2@musmehl.de'], {}, ['Uroma'], [50, 62], ['Geige'],"
             + " ['Kokain'], ['Schnupfen'], False, True, True, True)")
 
@@ -174,7 +174,7 @@ def test_counselorPrint():
     assert (
         counselor.__str__() == "Counselor(Merkel,Angela,1987-08-20,Gender.MALE,['test@musmehl.de'],['01112222222'],"
         + "Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,TransportType.BUS,2018-08-27 11:30:00,"
-        + "TransportType.PRIVATE,[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,42, [8, 9])")
+        + "TransportType.PRIVATE,[FoodRestriction.CELIAC_DISEASE],Supercooler Typ!!!,42, [8, 9])")
 
 
 def test_guestPrint():
@@ -182,4 +182,4 @@ def test_guestPrint():
     assert (
         guest.__str__() == "Guest(Bombadil,Tom,1987-08-20,Gender.MALE,['test@musmehl.de'],['01112222222'],"
         + "Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,TransportType.BUS,2018-08-27 11:30:00,"
-        + "TransportType.PRIVATE,[<FoodRestriction.CELIAC_DISEASE: 5>],Supercooler Typ!!!,42)")
+        + "TransportType.PRIVATE,[FoodRestriction.CELIAC_DISEASE],Supercooler Typ!!!,42)")

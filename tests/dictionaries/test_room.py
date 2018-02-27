@@ -89,7 +89,7 @@ def test_roomPrint():
 
 def test_generalRoomPrint():
     generalRoom = getGeneralRoomExample()[0]
-    assert (generalRoom.__str__() == "GeneralRoom(test,[<Equipment.PIANO: 1>, <Equipment.WHITEBOARD: 3>])")
+    assert (generalRoom.__str__() == "GeneralRoom(test,[Equipment.PIANO, Equipment.WHITEBOARD])")
 
 
 def test_privateRoomPrint():
