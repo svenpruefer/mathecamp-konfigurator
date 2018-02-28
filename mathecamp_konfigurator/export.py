@@ -61,11 +61,14 @@ class IO:
         """
         try:
             result = {}
-            with open(self.path + filename) as fileToRead:
-                csvFileReader = csv.DictReader(fileToRead, delimiter =';')
-                for row in csvFileReader:
-                    rowId = row.pop('Id')
-                    result[rowId] = SortedDict(row)
+            if os.path.isfile(self.path + filename):
+                with open(self.path + filename) as fileToRead:
+                    csvFileReader = csv.DictReader(fileToRead, delimiter =';')
+                    for row in csvFileReader:
+                        rowId = row.pop('Id')
+                        result[rowId] = SortedDict(row)
+            else:
+                return ({})
         except Exception as e:
             return e
         else:
@@ -88,8 +91,21 @@ class IO:
 
         :return: an instance of a Mathecamp
         """
-        # TODO Implement this
-        pass
+        dictionary = {
+            "generalData" : {},
+            "generalRooms" : self.readDictFromFile("generalRooms.csv"),
+            "privateRooms" : self.readDictFromFile("privateRooms.csv"),
+            "activities" : self.readDictFromFile("activities.csv"),
+            "mathCircles" : self.readDictFromFile("mathCircles.csv"),
+            "expenses" : self.readDictFromFile("expenses.csv"),
+            "participants" : self.readDictFromFile("participants.csv"),
+            "counselors" : self.readDictFromFile("counselors.csv"),
+            "guests" : self.readDictFromFile("guests.csv"),
+            "spacetimeSlots" : self.readDictFromFile("spacetimeSlots.csv"),
+            "schedule" : {}
+        }
+
+        return (Mathecamp.fromDictOfStrings(dictionary))
 
     def cleanDirectory(self):
         for file in os.listdir(self.path):
