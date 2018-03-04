@@ -53,6 +53,26 @@ class IO:
         else:
             return True
 
+    def writeGeneralDataDictToFile(self, filename, dictionary):
+        """
+        writes the generalData dictionary of a mathcamp to a file
+        :param filename: the path of the file where to write the dictionary to
+        :param dictionary: the generalData dictionary to write to file
+        :return: True if successful or an exception
+        """
+        try:
+            with open(filename, 'w', encoding = 'utf-8-sig') as fileToWrite:
+                csvFileWriter = csv.DictWriter(fileToWrite, fieldnames = ["Key", "Value"], delimiter = ';')
+
+                csvFileWriter.writeheader()
+                for (k,v) in dictionary.items():
+                    csvFileWriter.writerow({"Key" : k, "Value" : v})
+        except Exception as e:
+            print(e)
+            return e
+        else:
+            return True
+
     def readDictFromFile(self, filename):
         """
 
@@ -62,11 +82,31 @@ class IO:
         try:
             result = {}
             if os.path.isfile(self.path + filename):
-                with open(self.path + filename) as fileToRead:
+                with open(self.path + filename, encoding = 'utf-8-sig') as fileToRead:
                     csvFileReader = csv.DictReader(fileToRead, delimiter =';')
                     for row in csvFileReader:
                         rowId = row.pop('Id')
                         result[rowId] = SortedDict(row)
+            else:
+                return ({})
+        except Exception as e:
+            return e
+        else:
+            return (result)
+
+    def readGeneralDataDictFromFile(self, filename):
+        """
+
+        :param filename:
+        :return:
+        """
+        try:
+            result = {}
+            if os.path.isfile(self.path + filename):
+                with open(self.path + filename, encoding = 'utf-8-sig') as fileToRead:
+                    csvFileReader = csv.DictReader(fileToRead, delimiter =';')
+                    for row in csvFileReader:
+                        result[row["Key"]] = row["Value"]
             else:
                 return ({})
         except Exception as e:
@@ -84,7 +124,10 @@ class IO:
 
         for dictName in dictionaryToWrite.keys():
             if dictName != "generalData" and dictName != "schedule" and dictionaryToWrite[dictName] != {}:
-                self.writeDictToFile(dictName + ".csv",dictionaryToWrite[dictName])
+                self.writeDictToFile(self.path + dictName + ".csv",dictionaryToWrite[dictName])
+            elif dictName == "generalData":
+                self.writeGeneralDataDictToFile(self.path + dictName + '.csv', dictionaryToWrite[dictName])
+
 
     def readMathecampFromFiles(self):
         """
@@ -92,7 +135,7 @@ class IO:
         :return: an instance of a Mathecamp
         """
         dictionary = {
-            "generalData" : {},
+            "generalData" : self.readGeneralDataDictFromFile("generalData.csv"),
             "generalRooms" : self.readDictFromFile("generalRooms.csv"),
             "privateRooms" : self.readDictFromFile("privateRooms.csv"),
             "activities" : self.readDictFromFile("activities.csv"),

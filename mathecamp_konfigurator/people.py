@@ -123,7 +123,7 @@ class Human:
         """
         return (Human(dictionary["familyName"],
                       dictionary["givenName"],
-                      date.fromtimestamp(dictionary["birthDate"]),
+                      datetime.date(datetime.strptime(dictionary["birthDate"], "%Y-%m-%d")),
                       ast.literal_eval(dictionary["emailAddresses"]),
                       Gender.fromString(dictionary["gender"]),
                       ast.literal_eval(dictionary["phoneNumbers"]),
@@ -131,11 +131,11 @@ class Human:
                       dictionary["streetNumber"],
                       dictionary["postalCode"],
                       dictionary["place"],
-                      datetime.strptime(dictionary["arrivalTime"]),
+                      datetime.strptime(dictionary["arrivalTime"], "%Y-%m-%d %H:%M:%S"),
                       TransportType.fromString(dictionary["arrivalType"]),
-                      datetime.strptime(dictionary["departureTime"]),
+                      datetime.strptime(dictionary["departureTime"], "%Y-%m-%d %H:%M:%S"),
                       TransportType.fromString(dictionary["departureType"]),
-                      [FoodRestriction.fromString(x) for x in ast.literal_eval(dictionary["foodRestrictions"])],
+                      FoodRestriction.parseListString(dictionary["foodRestrictions"]),
                       dictionary["miscellaneous"],
                       int(dictionary["room"])))
 
@@ -299,7 +299,7 @@ class Participant(Human):
         """
         return (Participant(dictionary["familyName"],
                             dictionary["givenName"],
-                            date.fromtimestamp(dictionary["birthDate"]),
+                            datetime.date(datetime.strptime(dictionary["birthDate"], "%Y-%m-%d")),
                             int(dictionary["campPrice"]),
                             ast.literal_eval(dictionary["moneyPayedAlready"]),
                             dictionary["circle"],
@@ -315,15 +315,15 @@ class Participant(Human):
                             dictionary["streetNumber"],
                             dictionary["postalCode"],
                             dictionary["place"],
-                            datetime.strptime(dictionary["arrivalTime"]),
+                            datetime.strptime(dictionary["arrivalTime"], "%Y-%m-%d %H:%M:%S"),
                             TransportType.fromString(dictionary["arrivalType"]),
-                            datetime.strptime(dictionary["departureTime"]),
+                            datetime.strptime(dictionary["departureTime"], "%Y-%m-%d %H:%M:%S"),
                             TransportType.fromString(dictionary["departureType"]),
                             dictionary["departureOtherPerson"],
                             ast.literal_eval(dictionary["friends"]),
                             ast.literal_eval(dictionary["instrument"]),
                             ast.literal_eval(dictionary["medicalDrugs"]),
-                            [FoodRestriction.fromString(x) for x in ast.literal_eval(dictionary["foodRestrictions"])],
+                            FoodRestriction.parseListString(dictionary["foodRestrictions"]),
                             ast.literal_eval(dictionary["illness"]),
                             ast.literal_eval(dictionary["rideSharing"]),
                             ast.literal_eval(dictionary["swimmingPermission"]),
@@ -420,7 +420,7 @@ class Counselor(Human):
         """
         return (Counselor(dictionary["familyName"],
                           dictionary["givenName"],
-                          date.fromtimestamp(dictionary["birthDate"]),
+                          datetime.date(datetime.strptime(dictionary["birthDate"], "%Y-%m-%d")),
                           ast.literal_eval(dictionary["emailAddresses"]),
                           Gender.fromString(dictionary["gender"]),
                           ast.literal_eval(dictionary["phoneNumbers"]),
@@ -428,14 +428,14 @@ class Counselor(Human):
                           dictionary["streetNumber"],
                           dictionary["postalCode"],
                           dictionary["place"],
-                          datetime.strptime(dictionary["arrivalTime"]),
+                          datetime.strptime(dictionary["arrivalTime"], "%Y-%m-%d %H:%M:%S"),
                           TransportType.fromString(dictionary["arrivalType"]),
-                          datetime.strptime(dictionary["departureTime"]),
+                          datetime.strptime(dictionary["departureTime"], "%Y-%m-%d %H:%M:%S"),
                           TransportType.fromString(dictionary["departureType"]),
-                          [FoodRestriction.fromString(x) for x in ast.literal_eval(dictionary["foodRestrictions"])],
+                          FoodRestriction.parseListString(dictionary["foodRestrictions"]),
                           dictionary["miscellaneous"],
                           int(dictionary["room"]),
-                          ast.literal_eval(dictionary["prefferedGrades"])))
+                          ast.literal_eval(dictionary["preferredGrades"])))
 
 
 #########
@@ -518,7 +518,7 @@ class Guest(Human):
         """
         return (Guest(dictionary["familyName"],
                       dictionary["givenName"],
-                      date.fromtimestamp(dictionary["birthDate"]),
+                      datetime.date(datetime.strptime(dictionary["birthDate"], "%Y-%m-%d")),
                       ast.literal_eval(dictionary["emailAddresses"]),
                       Gender.fromString(dictionary["gender"]),
                       ast.literal_eval(dictionary["phoneNumbers"]),
@@ -526,10 +526,10 @@ class Guest(Human):
                       dictionary["streetNumber"],
                       dictionary["postalCode"],
                       dictionary["place"],
-                      datetime.strptime(dictionary["arrivalTime"]),
+                      datetime.strptime(dictionary["arrivalTime"], "%Y-%m-%d %H:%M:%S"),
                       TransportType.fromString(dictionary["arrivalType"]),
-                      datetime.strptime(dictionary["departureTime"]),
+                      datetime.strptime(dictionary["departureTime"], "%Y-%m-%d %H:%M:%S"),
                       TransportType.fromString(dictionary["departureType"]),
-                      [FoodRestriction.fromString(x) for x in ast.literal_eval(dictionary["foodRestrictions"])],
+                      FoodRestriction.parseListString(dictionary["foodRestrictions"]),
                       dictionary["miscellaneous"],
                       int(dictionary["room"])))

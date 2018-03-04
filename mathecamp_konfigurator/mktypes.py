@@ -27,9 +27,18 @@ class Gender(Enum):
     def fromString(cls, string):
         conversion = {
             "Gender.FEMALE": Gender.FEMALE,
-            "Gender.MALE": Gender.Male
+            "Gender.MALE": Gender.MALE
         }
         return (conversion[string])
+
+    @classmethod
+    def parseListString(cls, string):
+        result = []
+        if string == "[]":
+            return (result)
+        for entry in string.strip()[1:-1].split(','):
+            result.append(Gender.fromString(entry.strip()))
+        return (result)
 
     def __str__(self):
         return ("Gender." + self.name.__str__())
@@ -51,6 +60,15 @@ class Occupation(Enum):
             "Occupation.Guest": Occupation.GUEST
         }
         return (conversion[string])
+
+    @classmethod
+    def parseListString(cls, string):
+        result = []
+        if string == "[]":
+            return (result)
+        for entry in string.strip()[1:-1].split(','):
+            result.append(Occupation.fromString(entry.strip()))
+        return (result)
 
     def __str__(self):
         return ("Occupation." + self.name.__str__())
@@ -83,6 +101,15 @@ class FoodRestriction(Enum):
         }
         return (conversion[string])
 
+    @classmethod
+    def parseListString(cls, string):
+        result = []
+        if string == "[]":
+            return (result)
+        for entry in string.strip()[1:-1].split(','):
+            result.append(FoodRestriction.fromString(entry.strip()))
+        return (result)
+
     def __str__(self):
         return ("FoodRestriction." + self.name.__str__())
 
@@ -103,6 +130,15 @@ class TransportType(Enum):
             "TransportType.SELF": TransportType.SELF
         }
         return (conversion[string])
+
+    @classmethod
+    def parseListString(cls, string):
+        result = []
+        if string == "[]":
+            return (result)
+        for entry in string.strip()[1:-1].split(','):
+            result.append(TransportType.fromString(entry.strip()))
+        return (result)
 
     def __str__(self):
         return ("TransportType." + self.name.__str__())
@@ -125,7 +161,16 @@ class Equipment(Enum):
             "Equipment.WHITEBOARD": Equipment.WHITEBOARD,
             "Equipment.CANVAS": Equipment.CANVAS
         }
-        return (conversion.get[string])
+        return (conversion[string])
+
+    @classmethod
+    def parseListString(cls, string):
+        result = []
+        if string == "[]":
+            return (result)
+        for entry in string.strip()[1:-1].split(','):
+            result.append(Equipment.fromString(entry.strip()))
+        return (result)
 
     def __str__(self):
         return ("Equipment." + self.name.__str__())
@@ -352,8 +397,8 @@ class SpaceTimeSlot:
 
     @classmethod
     def fromDictOfStrings(cls, dictionary):
-        return (SpaceTimeSlot(parser.parse(dictionary["beginning"]),
-                              parser.parse(dictionary["end"]),
+        return (SpaceTimeSlot(datetime.strptime(dictionary["beginning"], "%Y-%m-%d %H:%M:%S"),
+                              datetime.strptime(dictionary["end"], "%Y-%m-%d %H:%M:%S"),
                               int(dictionary["room"])))
 
 
@@ -434,8 +479,7 @@ class GeneralRoom(Room):
 
     @classmethod
     def fromDictOfStrings(cls, dictionary):
-        return GeneralRoom(dictionary["name"],
-                           [x.strip().fromString() for x in ast.literal_eval(dictionary["equipment"])])
+        return GeneralRoom(dictionary["name"], Equipment.parseListString(dictionary["equipment"]))
 
 
 class PrivateRoom(Room):
@@ -489,10 +533,14 @@ class PrivateRoom(Room):
 
     @classmethod
     def fromDictOfStrings(cls, dictionary):
+        if dictionary["bedtime"] == "":
+            bedtime = None
+        else:
+            bedtime = time.strptime(dictionary["bedtime"], "%H:%M:%S")
         return PrivateRoom(dictionary["name"],
                            int(dictionary["capacity"]),
-                           [int(x.strip()) for x in ast.literal_eval(dictionary["inhabitants"])],
-                           time.strptime(dictionary["bedtime"], "%H:%M:%S"),
+                           ast.literal_eval(dictionary["inhabitants"]),
+                           bedtime,
                            ast.literal_eval(dictionary["reservedForCounselors"]))
 
 # </editor-fold>

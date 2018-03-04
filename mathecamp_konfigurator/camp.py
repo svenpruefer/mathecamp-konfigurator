@@ -202,8 +202,8 @@ class Mathecamp():
         """
 
         return (Mathecamp(
-            datetime.strptime(dictionary["generalData"]["startDate"]),
-            datetime.strptime(dictionary["generalData"]["endDate"]),
+            datetime.strptime(dictionary["generalData"]["startDate"], "%Y-%m-%d %H:%M:%S"),
+            datetime.strptime(dictionary["generalData"]["endDate"], "%Y-%m-%d %H:%M:%S"),
             int(dictionary["generalData"]["nextHumanId"]),
             int(dictionary["generalData"]["nextRoomId"]),
             int(dictionary["generalData"]["nextActivityId"]),
