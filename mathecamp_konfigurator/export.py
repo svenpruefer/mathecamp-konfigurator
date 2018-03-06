@@ -156,9 +156,9 @@ class IO:
     def cleanDirectory(self):
         for file in os.listdir(self.path):
             try:
-                os.remove(file)
+                os.remove(self.path + file)
             except Exception:
-                os.rmdir(file)
+                os.rmdir(self.path + file)
     
     def writeScheduleToFile(self, filename, list):
         """

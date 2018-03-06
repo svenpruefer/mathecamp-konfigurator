@@ -9,7 +9,10 @@ import os
 def test_writeMathecampToFile():
     mathecamp = getMathecampExample()[0]
 
-    testIO = IO(os.path.realpath(__file__)[:-16])
+    path = os.path.realpath(__file__)[:-16] + "testData/"
+    if not os.path.isdir(path):
+        os.mkdir(path)
+    testIO = IO(path)
 
     testIO.writeMathecampToFiles(mathecamp)
     parsedMathecamp = testIO.readMathecampFromFiles()
