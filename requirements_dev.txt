@@ -10,5 +10,5 @@ cryptography==2.1.4
 PyYAML==3.12
 pytest==3.4.2
 pytest-runner==4.0
-python-dateutil==2.6.1
+python-dateutil==2.7.0
 sortedcontainers==1.5.9
