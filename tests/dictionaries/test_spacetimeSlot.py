@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
-from mathecamp_konfigurator.mktypes import SpaceTimeSlot
+from mathecamp_konfigurator.model.types import SpaceTimeSlot
 
 
 ################

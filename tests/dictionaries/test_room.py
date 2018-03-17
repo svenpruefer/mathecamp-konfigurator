@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import time
-from mathecamp_konfigurator.mktypes import Room, Equipment, GeneralRoom, PrivateRoom
+from mathecamp_konfigurator.model.types import Room, Equipment, GeneralRoom, PrivateRoom
 
 
 ################

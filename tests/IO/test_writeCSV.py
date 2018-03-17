@@ -3,7 +3,6 @@
 
 from tests.dictionaries.test_mathecamp import getMathecampExample
 from mathecamp_konfigurator.export import IO
-from mathecamp_konfigurator.mktypes import FoodRestriction
 import os
 
 def test_writeMathecampToFile():

@@ -7,7 +7,7 @@
 ##########
 
 # from datetime import *
-from mathecamp_konfigurator.mktypes import *
+from mathecamp_konfigurator.model.types import *
 
 
 #########

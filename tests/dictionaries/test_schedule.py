@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from datetime import datetime
-from mathecamp_konfigurator.mktypes import Schedule
+from mathecamp_konfigurator.model.types import Schedule
 
 
 ################

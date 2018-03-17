@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from mathecamp_konfigurator.mktypes import Activity
+from mathecamp_konfigurator.model.types import Activity
 
 
 ################

@@ -7,7 +7,7 @@
 # Imports #
 ###########
 
-from mathecamp_konfigurator.camp import Mathecamp
+from mathecamp_konfigurator.model.camp import Mathecamp
 import csv
 import os
 from sortedcontainers import SortedDict, SortedList

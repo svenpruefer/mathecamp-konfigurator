@@ -8,10 +8,8 @@ __docformat__ = 'reStructuredText'
 ###########
 # Imports #
 ###########
-from datetime import *
-from mathecamp_konfigurator.people import *
+from mathecamp_konfigurator.model.people import *
 from sortedcontainers import SortedDict, SortedList
-from dateutil.parser import parse
 
 
 #############

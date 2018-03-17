@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import pytest
 
-from mathecamp_konfigurator.camp import Mathecamp
+from mathecamp_konfigurator.model.camp import Mathecamp
 from tests.dictionaries.test_people import getCounselorExample, getParticipantExample, getGuestExample
 from tests.dictionaries.test_room import getGeneralRoomExample, getPrivateRoomExample
 from tests.dictionaries.test_activities import getActivityExample
