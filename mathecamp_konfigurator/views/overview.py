@@ -18,21 +18,10 @@
 # You should have received a copy of the GNU General Public License
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
-from tests.dictionaries.test_mathecamp import getMathecampExample
-from mathecamp_konfigurator.export import IO
-import os
+from flask import Blueprint
 
-def test_writeMathecampToFile():
-    mathecamp = getMathecampExample()[0]
+overview = Blueprint('overview', __name__)
 
-    path = os.path.realpath(__file__)[:-16] + "testData/"
-    if not os.path.isdir(path):
-        os.mkdir(path)
-    testIO = IO(path)
-
-    testIO.writeMathecampToFiles(mathecamp)
-    parsedMathecamp = testIO.readMathecampFromFiles()
-
-    assert(parsedMathecamp.toDict() == mathecamp.toDict())
-    testIO.cleanDirectory()
-
+@overview.route('/')
+def showOverview():
+    return 'Test of showOverviw'
