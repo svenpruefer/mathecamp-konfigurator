@@ -19,9 +19,11 @@
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
 from flask import Blueprint
+from flask import render_template
 
 overview = Blueprint('overview', __name__)
 
 @overview.route('/')
+@overview.route('/general/')
 def showOverview():
-    return 'Test of showOverviw'
+    return render_template('overview/general.html')

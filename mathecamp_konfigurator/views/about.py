@@ -18,32 +18,11 @@
 # You should have received a copy of the GNU General Public License
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
-"""Top-level package for mathecamp-konfigurator."""
-
-__author__ = """Sven Pruefer"""
-__email__ = 'pruefer.sven@gmail.com'
-__version__ = '0.1.0'
-
-from flask import Flask
+from flask import Blueprint
 from flask import render_template
-from .views.overview import overview
-from .views.about import about
-from .views.camp import camp
-from flask_bootstrap import Bootstrap
-from flask_debugtoolbar import DebugToolbarExtension
 
-app = Flask(__name__, instance_relative_config=True)
+about = Blueprint('about', __name__)
 
-app.config.from_object('config')
-app.config.from_pyfile('config.py')
-
-Bootstrap(app)
-toolbar = DebugToolbarExtension(app)
-
-app.register_blueprint(overview, url_prefix='/overview/')
-app.register_blueprint(about, url_prefix='/about/')
-app.register_blueprint(camp)
-
-@app.route('/')
-def entryPoint():
-    return render_template('index.html')
+@about.route('/')
+def showAbout():
+    return render_template('about.html')

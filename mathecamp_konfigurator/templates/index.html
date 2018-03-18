@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}Mathecamp-konfigurator{% endblock %}
+
+{% block page_header %}Allgemeine Informationen{% endblock %}
+
+{% block page_content %}
+    <div class="container-fluid" >
+        <form action="/load_project/" method="post">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Lade Projekt</button>
+        </form>
+    </div>
+    <div class="container-fluid">Projekt erfolgreich geladen von:</div>
+{% endblock %}
