@@ -25,20 +25,23 @@ __email__ = 'pruefer.sven@gmail.com'
 __version__ = '0.1.0'
 
 from flask import Flask
+from config import Config
 from flask import render_template
 from .views.overview import overview
 from .views.about import about
 from .views.camp import camp
 from flask_bootstrap import Bootstrap
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__, instance_relative_config=True)
 
-app.config.from_object('config')
+app.config.from_object(Config)
 app.config.from_pyfile('config.py')
 
 Bootstrap(app)
-toolbar = DebugToolbarExtension(app)
+DebugToolbarExtension(app)
+db = SQLAlchemy(app)
 
 app.register_blueprint(overview, url_prefix='/overview/')
 app.register_blueprint(about, url_prefix='/about/')
