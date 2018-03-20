@@ -26,17 +26,60 @@
 
 # from datetime import *
 from mathecamp_konfigurator.model.types import *
-
+from mathecamp_konfigurator import db
+from mathecamp_konfigurator.model.enums import Gender, TransportType
 
 #########
 # Human #
 #########
 
-class Human:
+class Human(db.Model):
     """
     This class is a general human, i.e. either a particpant, a counselor or a guest.
     """
+    
+    __tablename__ = 'humans'
+    
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
 
+    familyName = db.Column(db.String)
+
+    givenName = db.Column(db.String)
+
+    birthDate = db.Column(db.DateTime)
+
+    gender = db.Column(db.Enum(Gender))
+
+    emailAddresses = db.relationship("EmailAddress")
+    
+    phoneNumbers = db.relationship("PhoneNumber")
+    
+    street = db.Column(db.String)
+    
+    streetNumber = db.Column(db.String)
+    
+    postalCode = db.Column(db.String)
+    
+    place = db.Column(db.String)
+    
+    arrivalTime = db.Column(db.DateTime)
+    
+    arrivalType = db.Column(db.Enum(TransportType))
+    
+    departureTime = db.Column(db.DateTime)
+    
+    departureType = db.Column(db.Enum(TransportType))
+    
+    foodRestrictions = db.relationship("FoodRestriction")
+    
+    miscellaneous = db.Column(db.String)
+    
+    room_id = db.Column(db.Integer, db.ForeignKey('privaterooms.id'))
+    room = db.relationship("PrivateRoom")
+    
+    # TODO implement rest
+    
+class Human:
     def __init__(self, familyName="", givenName="", birthDate=date.min, gender=None, emailAddresses=None,
                  phoneNumbers=None, street="", streetNumber="", postalCode="", place="", arrivalTime=None,
                  arrivalType=None, departureTime=None, departureType=None, foodRestrictions=None, miscellaneous="",
@@ -162,6 +205,18 @@ class Human:
 # Participant #
 ###############
 
+class Participant(db.Model):
+    
+    __tablename__ = 'participants'
+    
+    id =db.Column(db.Integer, primary_key = True, autoincrement = True)
+    
+    
+    
+    
+    
+    
+    
 class Participant(Human):
     """
     This class represents a person that participates in the Mathecamp.

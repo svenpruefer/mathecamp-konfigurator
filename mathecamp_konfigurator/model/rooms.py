@@ -87,11 +87,7 @@ class PrivateRoom(db.Model):
     
     reservedForCounselor = db.Column(db.Boolean)
     
-    inhabitantsGuests = db.relationship("Guest", back_populates = True)
-    
-    inhabitantsCounselors = db.relationship("Counselor", back_populates = True)
-    
-    inhabitantsParticipants = db.relationship("Participant", back_populates = True)
+    inhabitants = db.relationship("Human", back_populates = "humans")
     
     def __repr__(self):
         """
