@@ -25,6 +25,7 @@
 ##########
 
 # from datetime import *
+from mathecamp_konfigurator.model.association import interests, parentsEmail, emergencyNumbers
 from mathecamp_konfigurator.model.types import *
 from mathecamp_konfigurator import db
 from mathecamp_konfigurator.model.enums import Gender, TransportType
@@ -35,7 +36,7 @@ from mathecamp_konfigurator.model.enums import Gender, TransportType
 
 class Human(db.Model):
     """
-    This class is a general human, i.e. either a particpant, a counselor or a guest.
+    This class is a general human, i.e. either a participant, a counselor or a guest.
     """
     
     __tablename__ = 'humans'
@@ -209,7 +210,43 @@ class Participant(db.Model):
     
     __tablename__ = 'participants'
     
-    id =db.Column(db.Integer, primary_key = True, autoincrement = True)
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    
+    human_id = db.Column(db.Integer, db.ForeignKey("humans.id"))
+    human = db.relationship("Human")
+    
+    campPrice = db.Column(db.Float)
+    
+    moneyPayedAlread = db.Column(db.Boolean)
+    
+    mathCircle_id = db.Column(db.Integer, db.ForeignKey('mathcircles.id'))
+    mathCircle = db.relationship("MathCircle")
+    
+    grade = db.Column(db.Integer)
+    
+    topicWishes = db.relationship("Topic", secondary = interests)
+    
+    emailAddressesParents = db.relationship("EmailAddress", secondary = parentsEmail)
+    
+    phoneNumbersEmergency = db.relationship("PhoneNumber", secondary = emergencyNumbers)
+    
+    picture = db.Column(db.LargeBinary)
+    
+    departureOtherPerson = db.Column(db.String)
+    
+    friends =
+    
+    instruments =
+    
+    illness =
+    
+    rideSharingPermission = db.Column(db.Boolean)
+    
+    swimmingPermission = db.Column(db.Boolean)
+    
+    leavingPermission = db.Column(db.Boolean)
+    
+    sportsPermission = db.Column(db.Boolean)
     
     
     

@@ -31,3 +31,15 @@ teachingMaterials = db.Table('teachingmaterials', db.Base.metadata,
 roomEquipment = db.Table('roomequipment', db.Base.metadata,
                          db.Column('generalroom_id', db.Integer, db.ForeignKey('generalrooms.id')),
                          db.Column('equipment_id', db.Integer, db.ForeignKey('equipment.id')))
+
+interests = db.Table('interests', db.Base.metadata,
+                     db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
+                     db.Column('topic_id', db.Integer, db.ForeignKey('topics.id')))
+
+parentsEmail = db.Table('parentsemail', db.Base.metadata,
+                     db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
+                     db.Column('emailaddress_id', db.Integer, db.ForeignKey('emailaddresses.id')))
+
+emergencyNumbers = db.Table('emergencynumbers', db.Base.metadata,
+                     db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
+                     db.Column('emergencynumber_id', db.Integer, db.ForeignKey('phonenumbers.id')))
