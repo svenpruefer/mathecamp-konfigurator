@@ -210,3 +210,32 @@ class Illness(db.Model):
     @classmethod
     def fromDictOfStrings(cls, dictionary):
         return (Illness(name = dictionary["name"]))
+
+##########
+# Grades #
+##########
+
+class Grade(db.Model):
+    """
+    This class represents grades
+    """
+    
+    __tablename__ = 'grades'
+    
+    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+    
+    grade = db.Column(db.Integer)
+    
+    def __repr__(self):
+        return ("Grade({0})".format(self.grade))
+    
+    def toDict(self):
+        return ({"grade": self.grade})
+    
+    @classmethod
+    def fromDict(cls, dictionary):
+        return (Grade(grade = dictionary["grade"]))
+    
+    @classmethod
+    def fromDictOfStrings(cls, dictionary):
+        return (Grade(grade = dictionary["grade"]))

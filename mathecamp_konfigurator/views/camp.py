@@ -20,13 +20,10 @@
 
 from flask import Blueprint, redirect, url_for
 from flask import render_template
-from mathecamp_konfigurator.export import IO
 import os
 
 camp = Blueprint('camp', __name__)
 
 @camp.route('/load_project/', methods=['POST'])
 def loadProject():
-    mathecampIO = IO(os.path.realpath(__file__)[:-36] + "tests\\IO\\resources\\")
-    mathecamp = mathecampIO.readMathecampFromFiles()
-    return redirect(url_for('overview/general/'), beginningDate=mathecamp.dates['start'])
+    return "toll"

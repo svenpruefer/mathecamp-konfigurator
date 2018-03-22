@@ -43,3 +43,19 @@ parentsEmail = db.Table('parentsemail', db.Base.metadata,
 emergencyNumbers = db.Table('emergencynumbers', db.Base.metadata,
                      db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
                      db.Column('emergencynumber_id', db.Integer, db.ForeignKey('phonenumbers.id')))
+
+musicians = db.Table('musicians', db.Base.metadata,
+                     db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
+                     db.Column('instrument_id', db.Integer, db.ForeignKey('instruments.id')))
+
+sickPeople = db.Table('sickpeople', db.Base.metadata,
+                     db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
+                     db.Column('illness_id', db.Integer, db.ForeignKey('illness.id')))
+
+friendships = db.Table('friendships', db.Base.metadata,
+                     db.Column('friend_id', db.Integer, db.ForeignKey('participants.id')),
+                     db.Column('islikedfriend_id', db.Integer, db.ForeignKey('participants.id')))
+
+gradePreferences = db.Table('grade', db.Base.metadata,
+                     db.Column('counselor_id', db.Integer, db.ForeignKey('counselors.id')),
+                     db.Column('grade_id', db.Integer, db.ForeignKey('grades.id')))

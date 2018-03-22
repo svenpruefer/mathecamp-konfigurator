@@ -33,6 +33,7 @@ from .views.camp import camp
 from flask_bootstrap import Bootstrap
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
+from mathecamp_konfigurator.model import *
 
 app = Flask(__name__, instance_relative_config=True)
 
