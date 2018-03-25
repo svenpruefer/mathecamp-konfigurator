@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU General Public License
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
-from mathecamp_konfigurator.model.types import MathCircle
+from mathecamp_konfigurator.model.mktypes import MathCircle
 
 
 ################

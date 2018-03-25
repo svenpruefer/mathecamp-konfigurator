@@ -33,12 +33,12 @@ from .views.camp import camp
 from flask_bootstrap import Bootstrap
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
-from mathecamp_konfigurator.model import *
+from mathecamp_konfigurator.modelDB import *
 
-app = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__)#, instance_relative_config=True)
 
-app.config.from_object(Config)
-app.config.from_pyfile('config.py')
+#app.config.from_object(Config)
+#app.config.from_pyfile('config.py')
 
 Bootstrap(app)
 DebugToolbarExtension(app)
@@ -47,7 +47,3 @@ db = SQLAlchemy(app)
 app.register_blueprint(overview, url_prefix='/overview/')
 app.register_blueprint(about, url_prefix='/about/')
 app.register_blueprint(camp)
-
-@app.route('/')
-def entryPoint():
-    return render_template('index.html')

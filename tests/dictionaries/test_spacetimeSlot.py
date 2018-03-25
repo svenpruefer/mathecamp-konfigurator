@@ -19,7 +19,7 @@
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import datetime
-from mathecamp_konfigurator.model.types import SpaceTimeSlot
+from mathecamp_konfigurator.model.mktypes import SpaceTimeSlot
 
 
 ################

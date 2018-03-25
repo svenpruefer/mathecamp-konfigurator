@@ -13,3 +13,6 @@ pytest-runner==4.0
 python-dateutil==2.7.0
 sortedcontainers==1.5.9
 flask==0.12.2
+flask_bootstrap==3.3.7.1
+flask_debugtoolbar==0.10.1
+flask_sqlalchemy==2.3.2

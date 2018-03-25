@@ -19,7 +19,7 @@
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
 from tests.dictionaries.test_mathecamp import getMathecampExample
-from mathecamp_konfigurator.export import IO
+from mathecamp_konfigurator.model.export import IO
 import os
 
 def test_writeMathecampToFile():

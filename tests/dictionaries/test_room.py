@@ -19,7 +19,7 @@
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import time
-from mathecamp_konfigurator.model.types import Room, Equipment, GeneralRoom, PrivateRoom
+from mathecamp_konfigurator.model.mktypes import Room, Equipment, GeneralRoom, PrivateRoom
 
 
 ################
