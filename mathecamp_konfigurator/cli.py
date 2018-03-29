@@ -20,6 +20,12 @@
 
 """Console script for mathecamp_konfigurator."""
 
+__docformat__ = 'reStructuredText'
+
+###########
+# Imports #
+###########
+
 import click
 
 
