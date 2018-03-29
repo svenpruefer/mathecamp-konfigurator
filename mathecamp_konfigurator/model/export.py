@@ -172,7 +172,7 @@ class IO:
             "schedule": self.readScheduleFromFile("schedule.csv")
         }
 
-        return (Mathecamp.fromDictOfStrings(dictionary))
+        return Mathecamp.fromDictOfStrings(dictionary)
 
     def cleanDirectory(self):
         for file in os.listdir(self.path):

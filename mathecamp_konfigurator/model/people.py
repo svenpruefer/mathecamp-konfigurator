@@ -27,7 +27,9 @@ __docformat__ = 'reStructuredText'
 ##########
 
 
-from mathecamp_konfigurator.model.mktypes import *
+from mathecamp_konfigurator.model.types import *
+from mathecamp_konfigurator.model.enums import *
+import ast
 
 #########
 # Human #
@@ -173,7 +175,7 @@ class Participant(Human):
 
     def __init__(self, familyName="", givenName="", birthDate=date.min, campPrice=0,
                  moneyPayedAlready=0, circle=None, grade=0, topicWishes=None, emailAddresses=None,
-                 emailAdressesParents=None, gender=None, phoneNumbers=None, phoneNumbersEmergency=None, room=None,
+                 emailAddressesParents=None, gender=None, phoneNumbers=None, phoneNumbersEmergency=None, room=None,
                  street="", streetNumber="", postalCode="", place="", arrivalTime=None, arrivalType=None,
                  departureTime=None, departureType=None, departureOtherPerson=None, friends=None, instrument=None,
                  medicalDrugs=None, foodRestrictions=None, illness="", rideSharing=None, swimmingPermission=None,
@@ -220,8 +222,8 @@ class Participant(Human):
 
         if phoneNumbers is None:
             phoneNumbers = []
-        if emailAdressesParents is None:
-            emailAdressesParents = []
+        if emailAddressesParents is None:
+            emailAddressesParents = []
         if medicalDrugs is None:
             medicalDrugs = []
         if foodRestrictions is None:
@@ -248,7 +250,7 @@ class Participant(Human):
         self.circle = circle
         self.grade = grade
         self.topicWishes = topicWishes
-        self.emailAddressesParents = emailAdressesParents
+        self.emailAddressesParents = emailAddressesParents
         self.phoneNumbersEmergency = phoneNumbersEmergency
         self.departureOtherPerson = departureOtherPerson
         self.friends = friends
@@ -289,7 +291,7 @@ class Participant(Human):
                        "swimmingPermission": self.swimmingPermission, "leavingPermission": self.leavingPermission,
                        "sportsPermission": self.sportsPermission}.items():
             newDict[k] = v
-        return (newDict)
+        return newDict
 
     @classmethod
     def fromDict(cls, dictionary):
@@ -403,7 +405,7 @@ class Counselor(Human):
 
     def __str__(self):
         humanPrint = Human.__str__(self)[5:]
-        return ("Counselor" + humanPrint[:len(humanPrint) - 1] + ", {})".format(self.preferredGrades))
+        return "Counselor" + humanPrint[:len(humanPrint) - 1] + ", {})".format(self.preferredGrades)
 
     def toDict(self):
         """
@@ -414,7 +416,7 @@ class Counselor(Human):
         """
         newDict = Human.toDict(self)
         newDict["preferredGrades"] = self.preferredGrades
-        return (newDict)
+        return newDict
 
     @classmethod
     def fromDict(cls, dictionary):
@@ -505,14 +507,14 @@ class Guest(Human):
 
     def __str__(self):
         guestString = Human.__str__(self)[5:]
-        return ("Guest" + guestString)
+        return "Guest" + guestString
 
     def toDict(self):
         """
         maps guest instance to dictionary in order to save it to a csv file
         :return: a dictionary with keys
         """
-        return (Human.toDict(self))
+        return Human.toDict(self)
 
     @classmethod
     def fromDict(cls, dictionary):

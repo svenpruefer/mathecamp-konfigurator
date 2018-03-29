@@ -27,9 +27,12 @@ __docformat__ = 'reStructuredText'
 ###########
 
 
-from datetime import *
-from mathecamp_konfigurator.model.people import *
 from sortedcontainers import SortedDict, SortedList
+from mathecamp_konfigurator.model.activities import Activity
+from mathecamp_konfigurator.model.expenses import Expense
+from mathecamp_konfigurator.model.mathCircle import MathCircle
+from mathecamp_konfigurator.model.people import *
+from mathecamp_konfigurator.model.rooms import *
 
 
 #############
@@ -37,7 +40,7 @@ from sortedcontainers import SortedDict, SortedList
 #############
 
 
-class Mathecamp():
+class Mathecamp:
     """
     This is the main class representing all the data that a mathecamp comprises at any time of the planning
     """
@@ -116,8 +119,8 @@ class Mathecamp():
         :return: a dictionary containing the following data:
         generalData : a list of dictionaries each having an entry "parameter" and an entry "value" which represent
         the general settings and data of the mathecamp
-        privateRooms, generalRooms, activities, mathCircles, expenses, participants, counselors, guests and schedule: dictionaries with IDs
-        as keys and dictionaries with their respective data as values
+        privateRooms, generalRooms, activities, mathCircles, expenses, participants, counselors, guests and schedule:
+        dictionaries with IDs as keys and dictionaries with their respective data as values
         """
 
         generalDataDict = SortedDict({})
@@ -265,13 +268,13 @@ class Mathecamp():
             self.schedule.__str__() + ")"
         )
 
-    def isDuringCamp(self, time):
+    def isDuringCamp(self, timeToQuery):
         """
         returns a Boolean stating whether the given date time is during the Mathecamp or not
-        :param time: datetime to check
+        :param timeToQuery: datetime to check
         :return: a Boolean
         """
-        if (self.dates["start"] <= time and time <= self.dates["end"]):
+        if self.dates["start"] <= timeToQuery and timeToQuery <= self.dates["end"]:
             return True
         else:
             return False
@@ -292,120 +295,105 @@ class Mathecamp():
         """
         method for adding a room to the project
         :param room: a room of type Room
-        :return:
+        :return: modifies project in place
         """
 
         nextId = self.nextIds["Room"]
-        if (isinstance(room, GeneralRoom)):
-            self.generalRooms.append((nextId, room))
-        if (isinstance(room, PrivateRoom)):
-            self.privateRooms.append((nextId, room))
+        if isinstance(room, GeneralRoom):
+            self.generalRooms.update((nextId, room))
+        if isinstance(room, PrivateRoom):
+            self.privateRooms.update((nextId, room))
         self.nextIds["Room"] += 1
 
     def addActivity(self, activity):
         """
         method for adding an activity to the project
         :param activity: an activity of type Activity
-        :return:
+        :return: modifies project in place
         """
 
-        self.activities.append((self.nextIds["Activity"], activity))
+        self.activities.update((self.nextIds["Activity"], activity))
         self.nextIds["Activity"] += 1
 
     def addMathCircle(self, mathCircle):
         """
         method for adding a math circle to the project
         :param mathCircle: a mathcircle of type MathCircle
-        :return:
+        :return: modifies project in place
         """
 
-        self.mathCircles.append((self.nextIds["MathCircle"], mathCircle))
+        self.mathCircles.update((self.nextIds["MathCircle"], mathCircle))
         self.nextIds["MathCircle"] += 1
 
     def addHuman(self, human):
         """
         method for adding an arbitrary human
         :param human: the person to be added of type either Participant, Counselor or Guest
-        :return:
+        :return: modifies project in place
         """
 
         nextId = self.nextIds["Human"]
         if isinstance(human, Participant):
-            self.participants.append((nextId, human))
+            self.participants.update((nextId, human))
         elif isinstance(human, Counselor):
-            self.counselors.append((nextId, human))
+            self.counselors.update((nextId, human))
         elif isinstance(human, Guest):
-            self.guests.append((nextId, human))
+            self.guests.update((nextId, human))
         self.nextIds["Human"] += 1
 
     def addExpense(self, expense):
         """
         method for adding an expense
         :param expense: the expense to add of type Expense
-        :return:
+        :return: modifies project in place
         """
 
-        self.expenses.append((self.nextIds["Expense"], expense))
+        self.expenses.update((self.nextIds["Expense"], expense))
         self.nextIds["Expense"] += 1
 
-    def addRoomWithID(self, room, id):
+    def addRoomWithID(self, room, idNr):
         """
         method for adding a room to the project
         :param room: a room of type Room
+        :param idNr: id of room to add
         :return:
         """
+        # todo implement this method
 
-        nextId = self.nextIds["Room"]
-        if (isinstance(room, GeneralRoom)):
-            self.generalRooms.append((nextId, room))
-        if (isinstance(room, PrivateRoom)):
-            self.privateRooms.append((nextId, room))
-        self.nextIds["Room"] += 1
-
-    def addActivityWithID(self, activity, id):
+    def addActivityWithID(self, activity, idNr):
         """
         method for adding an activity to the project
         :param activity: an activity of type Activity
+        :param idNr: id of activity to add
         :return:
         """
+        # todo implement this method
 
-        self.activities.append((self.nextIds["Activity"], activity))
-        self.nextIds["Activity"] += 1
-
-    def addMathCircleWithID(self, mathCircle, id):
+    def addMathCircleWithID(self, mathCircle, idNr):
         """
         method for adding a math circle to the project
-        :param mathCircle: a mathcircle of type MathCircle
+        :param mathCircle: a math circle of type MathCircle
+        :param idNr: id of math circle to add
         :return:
         """
+        # todo implement this method
 
-        self.mathCircles.append((self.nextIds["MathCircle"], mathCircle))
-        self.nextIds["MathCircle"] += 1
-
-    def addHumanWithID(self, human, id):
+    def addHumanWithID(self, human, idNr):
         """
-        method for adding an arbitrary human
+        method for adding an arbitrary human with given id
         :param human: the person to be added of type either Participant, Counselor or Guest
+        :param idNr: id of human to be added
         :return:
         """
+        # todo implement this method
 
-        nextId = self.nextIds["Human"]
-        if isinstance(human, Participant):
-            self.participants.append((nextId, human))
-        elif isinstance(human, Counselor):
-            self.counselors.append((nextId, human))
-        elif isinstance(human, Guest):
-            self.guests.append((nextId, human))
-        self.nextIds["Human"] += 1
-
-    def addExpenseWithID(self, expense, id):
+    def addExpenseWithID(self, expense, idNr):
         """
-        method for adding an expense
+        method for adding an expense with given id
         :param expense: the expense to add of type Expense
-        :return:
+        :param idNr: id of expense to add
+        :return: modifies project in place
         """
-
-        self.expenses.append((self.nextIds["Expense"], expense))
-        self.nextIds["Expense"] += 1
+        # todo implement this method
 
     # </editor-fold>

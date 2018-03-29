@@ -19,7 +19,7 @@
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
 from datetime import date, datetime
-from mathecamp_konfigurator.model.mktypes import Gender, TransportType, FoodRestriction
+from mathecamp_konfigurator.model.enums import Gender, TransportType, FoodRestriction
 from mathecamp_konfigurator.model.people import Human, Participant, Counselor, Guest
 
 
