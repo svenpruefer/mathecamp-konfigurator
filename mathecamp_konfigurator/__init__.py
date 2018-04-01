@@ -19,6 +19,7 @@
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
 """Top-level package for mathecamp-konfigurator."""
+from sqlalchemy.ext.declarative import declarative_base
 
 __author__ = """Sven Pruefer"""
 __email__ = 'pruefer.sven@gmail.com'
@@ -33,17 +34,31 @@ from .views.camp import camp
 from flask_bootstrap import Bootstrap
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_sqlalchemy import SQLAlchemy
-from mathecamp_konfigurator.modelDB import *
 
-app = Flask(__name__)#, instance_relative_config=True)
+app = Flask(__name__, instance_relative_config=True)
 
-#app.config.from_object(Config)
-#app.config.from_pyfile('config.py')
+app.config.from_object(Config)
+app.config.from_pyfile('config.py')
 
 Bootstrap(app)
 DebugToolbarExtension(app)
 db = SQLAlchemy(app)
 
+Base = declarative_base()
+
+from mathecamp_konfigurator.modelDB.activities import *
+from mathecamp_konfigurator.modelDB.association import *
+from mathecamp_konfigurator.modelDB.enums import *
+from mathecamp_konfigurator.modelDB.expenses import *
+from mathecamp_konfigurator.modelDB.mathCircle import *
+from mathecamp_konfigurator.modelDB.people import *
+from mathecamp_konfigurator.modelDB.rooms import *
+from mathecamp_konfigurator.modelDB.types import *
+
 app.register_blueprint(overview, url_prefix='/overview/')
 app.register_blueprint(about, url_prefix='/about/')
 app.register_blueprint(camp)
+
+def init_db():
+    db.create_all()
+    db.session.commit()

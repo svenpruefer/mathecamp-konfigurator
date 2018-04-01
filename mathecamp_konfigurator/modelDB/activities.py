@@ -27,30 +27,30 @@ class Activity(db.Model):
         This class represents an activity such as afternoon activities or bigger projects that need to be organized or
         planned.
     """
-    
+
     __tablename__ = 'activities'
-    
+
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
+
     name = db.Column(db.String(128))
-    
+
     time = db.Column(db.DateTime)
-    
-    room_id = db.Column(db.Integer, db.ForeignKey('room.id'))
+
+    room_id = db.Column(db.Integer, db.ForeignKey('generalrooms.id'))
     room = db.relationship("Room")
-    
+
     expense = db.relationship("Expense", back_populates = "activity")
-    
+
     def __repr__(self):
         return ("Activity({0},{1},{2})".format(self.name, self.time, self.room_id))
-    
+
     def toDict(self):
         return ({"name": self.name, "time": self.time, "room_id": self.room_id})
-    
+
     @classmethod
     def fromDict(cls, dictionary):
         return (Activity(name = dictionary["name"], time = dictionary["time"], room_id = dictionary["room_id"]))
-    
+
     @classmethod
     def fromDictOfStrings(cls, dictionary):
         return (Activity(dictionary["name"],

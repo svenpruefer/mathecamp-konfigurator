@@ -114,3 +114,33 @@ class SpaceTimeSlot:
         return (SpaceTimeSlot(datetime.strptime(dictionary["beginning"], "%Y-%m-%d %H:%M:%S"),
                               datetime.strptime(dictionary["end"], "%Y-%m-%d %H:%M:%S"),
                               int(dictionary["room"])))
+
+#############
+# Penalties #
+#############
+
+class Penalty:
+    """
+    This class represents a penalty.
+    """
+
+    def __init__(self, name=""):
+        """
+        Basic constructor of a penalty
+        :param name: name of the penalty
+        """
+        self.name = name
+
+    def __str__(self):
+        return "Penalty(" + self.name + ")"
+
+    def toDict(self):
+        return {"name": self.name}
+
+    @classmethod
+    def fromDict(cls, dictionary):
+        return Penalty(dictionary["name"])
+
+    @classmethod
+    def fromDictOfStrings(cls, dictionary):
+        return Penalty(dictionary["name"])

@@ -57,7 +57,7 @@ def getParticipantExample(nameNo = 0):
                         "Karl-Liebknecht-Str.", "13", "86153", "Entenhausen", datetime(2018, 8, 19, 9, 30, 0),
                         TransportType.BUS, datetime(2018, 8, 27, 11, 30, 0), TransportType.PRIVATE, ["Uroma"],
                         [50, 62], ["Geige"], ["Kokain"], [FoodRestriction.CELIAC_DISEASE], ["Schnupfen"], False,
-                        True, True, True, "Supercooler Typ!!!"),
+                        True, True, True, [1],"Supercooler Typ!!!"),
             {"familyName": name[0], "givenName": name[1], "birthDate": date(1987, 8, 20),
              "gender": Gender.MALE, "emailAddresses": ["test@musmehl.de"],
              "phoneNumbers": ["01112222222"], "street": "Karl-Liebknecht-Str.",
@@ -74,7 +74,7 @@ def getParticipantExample(nameNo = 0):
              "friends": [50, 62],
              "instrument": ["Geige"], "medicalDrugs": ["Kokain"], "illness": ["Schnupfen"],
              "rideSharing": False, "swimmingPermission": True, "leavingPermission": True,
-             "sportsPermission": True})
+             "sportsPermission": True, "penalties": [1]})
 
 
 def getCounselorExample(nameNo = 0):
@@ -183,7 +183,7 @@ def test_participantPrint():
             + "['01112222222'],Karl-Liebknecht-Str.,13,86153,Entenhausen,2018-08-19 09:30:00,TransportType.BUS,"
             + "2018-08-27 11:30:00,TransportType.PRIVATE,[FoodRestriction.CELIAC_DISEASE],Supercooler Typ!!!,"
             + "42, 300, False, 10a, 10, ['Programmieren'], ['test2@musmehl.de'], {}, ['Uroma'], [50, 62], ['Geige'],"
-            + " ['Kokain'], ['Schnupfen'], False, True, True, True)")
+            + " ['Kokain'], ['Schnupfen'], False, True, True, True, [1])")
 
 
 def test_counselorPrint():

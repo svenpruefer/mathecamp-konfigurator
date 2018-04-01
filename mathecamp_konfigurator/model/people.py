@@ -179,7 +179,7 @@ class Participant(Human):
                  street="", streetNumber="", postalCode="", place="", arrivalTime=None, arrivalType=None,
                  departureTime=None, departureType=None, departureOtherPerson=None, friends=None, instrument=None,
                  medicalDrugs=None, foodRestrictions=None, illness="", rideSharing=None, swimmingPermission=None,
-                 leavingPermission=None, sportsPermission=None, miscellaneous=""):
+                 leavingPermission=None, sportsPermission=None, penalties=None, miscellaneous=""):
         """
         Basic constructor for participants
         :param familyName: Participants family name
@@ -217,6 +217,7 @@ class Participant(Human):
         :param leavingPermission: a Boolean whether the participant is allowed to leave the premises in a small group
         after telling counselors
         :param sportsPermission: a Boolean whether the participant is allowed to do sports
+        :param penalties: a list of ids of penalties, that the participant has received
         :param miscellaneous: a string for miscellaneous information
         """
 
@@ -240,6 +241,8 @@ class Participant(Human):
             emailAddresses = []
         if topicWishes is None:
             topicWishes = []
+        if penalties is None:
+            penalties = []
 
         Human.__init__(self, familyName, givenName, birthDate, gender, emailAddresses,
                        phoneNumbers, street, streetNumber, postalCode, place, arrivalTime,
@@ -261,15 +264,16 @@ class Participant(Human):
         self.swimmingPermission = swimmingPermission
         self.leavingPermission = leavingPermission
         self.sportsPermission = sportsPermission
+        self.penalties = penalties
 
     def __str__(self):
         humanPrint = Human.__str__(self)[5:]
         return ("Participant" + humanPrint[:len(
-            humanPrint) - 1] + ", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})"
+            humanPrint) - 1] + ", {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})"
                 .format(self.campPrice, self.moneyPayedAlready, self.circle, self.grade, self.topicWishes,
                         self.emailAddressesParents, self.phoneNumbersEmergency, self.departureOtherPerson, self.friends,
                         self.instrument, self.medicalDrugs, self.illness, self.rideSharing,
-                        self.swimmingPermission, self.leavingPermission, self.sportsPermission))
+                        self.swimmingPermission, self.leavingPermission, self.sportsPermission, self.penalties))
 
     def toDict(self):
         """
@@ -278,7 +282,7 @@ class Participant(Human):
         streetNumber, postalCode, place, arrivalTime, arrivalType, departureTime, departureType, foodRestrictions,
         miscellaneuos, room, grade, circle, campPrice, moneyPayedAlready, topicWishes, emailAddressesParents,
         phoneNumbersEmergency, departureOtherPerson, friends, instrument, medicalDrugs, foodRestrictions, illness,
-        rideSharing, swimmingPermission, leavingPermission, sportsPermission
+        rideSharing, swimmingPermission, leavingPermission, sportsPermission, penalties
         """
         newDict = Human.toDict(self)
         for (k, v) in {"grade": self.grade, "circle": self.circle, "campPrice": self.campPrice,
@@ -289,7 +293,7 @@ class Participant(Human):
                        "friends": self.friends, "instrument": self.instrument, "medicalDrugs": self.medicalDrugs,
                        "illness": self.illness, "rideSharing": self.rideSharing,
                        "swimmingPermission": self.swimmingPermission, "leavingPermission": self.leavingPermission,
-                       "sportsPermission": self.sportsPermission}.items():
+                       "sportsPermission": self.sportsPermission, "penalties": self.penalties}.items():
             newDict[k] = v
         return newDict
 
@@ -311,7 +315,7 @@ class Participant(Human):
                             dictionary["medicalDrugs"], dictionary["foodRestrictions"], dictionary["illness"],
                             dictionary["rideSharing"], dictionary["swimmingPermission"],
                             dictionary["leavingPermission"],
-                            dictionary["sportsPermission"], dictionary["miscellaneous"]))
+                            dictionary["sportsPermission"], dictionary["penalties"], dictionary["miscellaneous"]))
 
     @classmethod
     def fromDictOfStrings(cls, dictionary):
@@ -351,6 +355,7 @@ class Participant(Human):
                             ast.literal_eval(dictionary["swimmingPermission"]),
                             ast.literal_eval(dictionary["leavingPermission"]),
                             ast.literal_eval(dictionary["sportsPermission"]),
+                            ast.literal_eval(dictionary["penalties"]),
                             dictionary["miscellaneous"]))
 
 

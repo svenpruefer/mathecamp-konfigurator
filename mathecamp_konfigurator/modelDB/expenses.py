@@ -26,32 +26,32 @@ class Expense(db.Model):
     """
     This class represents an expense for something.
     """
-    
+
     __tablename__ = 'expenses'
-    
+
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
+
     name = db.Column(db.String(128))
-    
+
     amount = db.Column(db.Float)
-    
+
     payedAlready = db.Column(db.Boolean)
-    
-    activity_id = db.Column(db.Integer, db.ForeignKey('activity.id'))
+
+    activity_id = db.Column(db.Integer, db.ForeignKey('activities.id'))
     activity = db.relationship("Activity", back_populates = "expense")
-    
+
     def __repr__(self):
         return ("Expense({0},{1},{2},{3})".format(self.name, self.amount, self.activity_id, self.payedAlready))
-    
+
     def toDict(self):
         return ({"name": self.name, "amount": self.amount, "activity_id": self.activity_id, "payedAlready":
             self.payedAlready})
-    
+
     @classmethod
     def fromDict(cls, dictionary):
         return (Expense(name = dictionary["name"], amount = dictionary["amount"], activity_id = dictionary[
             "activity_id"], payedAlready = dictionary["payedAlready"]))
-    
+
     @classmethod
     def fromDictOfStrings(cls, dictionary):
         return (Expense(name = dictionary["name"],

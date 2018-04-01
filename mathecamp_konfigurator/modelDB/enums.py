@@ -18,133 +18,165 @@
 # You should have received a copy of the GNU General Public License
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
-from enum import Enum
+"""This file defines enums in mathecamp-konfigurator by mirroring their SQL counterparts instead of using the enum
+ package. This has the advantage of allowing to add new 'enums' dynamically."""
 
-class Gender(Enum):
-    FEMALE = 1
-    MALE = 2
-    
+__docformat__ = 'reStructuredText'
+
+
+class Gender:
+    """
+    Possible genders in mathecamp_konfigurator.
+    """
+
+    def __init__(self, name):
+        self.name = name
+
     @classmethod
     def fromString(cls, string):
-        conversion = {
-            "Gender.FEMALE": Gender.FEMALE,
-            "Gender.MALE": Gender.MALE
-        }
-        return (conversion[string])
-    
+        if string.startswith('Gender.'):
+            return string.split('.')[1]
+        else:
+            raise ValueError("String to parse did not start with 'Gender.'")
+
     @classmethod
     def parseListString(cls, string):
         result = []
         if string == "[]":
-            return (result)
+            return result
         for entry in string.strip()[1:-1].split(','):
             result.append(Gender.fromString(entry.strip()))
-        return (result)
-    
+        return result
+
     def __str__(self):
-        return ("Gender." + self.name.__str__())
-    
+        return "Gender." + self.name.__str__()
+
     def __repr__(self):
-        return (self.__str__())
+        return self.__str__()
 
 
-class FoodRestriction(Enum):
-    VEGETARIAN = 1
-    VEGAN = 2
-    NO_MEAT = 3
-    NO_FISH = 4
-    CELIAC_DISEASE = 5
-    NO_NUTS = 6
-    NO_EGGS = 7
-    NO_CARROTS = 8
-    
+class FoodRestriction:
+    """
+    Possible food restrictions in a mathecamp. By default includes VEGETARIAN, VEGAN, NO_MEAT, NO_FISH, CELIAC_DISEASE,
+    NO_NUTS, NO_EGGS, NO_CARROTS
+    """
+
+    def __init__(self, name):
+        self.name =name
+
     @classmethod
     def fromString(cls, string):
-        conversion = {
-            "FoodRestriction.VEGETARIAN": FoodRestriction.VEGETARIAN,
-            "FoodRestriction.VEGAN": FoodRestriction.VEGAN,
-            "FoodRestriction.NO_MEAT": FoodRestriction.NO_MEAT,
-            "FoodRestriction.NO_FISH": FoodRestriction.NO_FISH,
-            "FoodRestriction.CELIAC_DISEASE": FoodRestriction.CELIAC_DISEASE,
-            "FoodRestriction.NO_NUTS": FoodRestriction.NO_NUTS,
-            "FoodRestriction.NO_EGGS": FoodRestriction.NO_EGGS,
-            "FoodRestriction.NO_CARROTS": FoodRestriction.NO_CARROTS
-        }
-        return (conversion[string])
-    
+        if string.startswith('FoodRestriction.'):
+            return string.split('.')[1]
+        else:
+            raise ValueError("String to parse did not start with 'FoodRestriction.'")
+
     @classmethod
     def parseListString(cls, string):
         result = []
         if string == "[]":
-            return (result)
+            return result
         for entry in string.strip()[1:-1].split(','):
             result.append(FoodRestriction.fromString(entry.strip()))
-        return (result)
-    
+        return result
+
     def __str__(self):
-        return ("FoodRestriction." + self.name.__str__())
-    
+        return "FoodRestriction." + self.name.__str__()
+
     def __repr__(self):
-        return (self.__str__())
+        return self.__str__()
 
 
-class TransportType(Enum):
-    BUS = 1
-    PRIVATE = 2
-    SELF = 3
-    
+class TransportType:
+    """
+    Class for types of transport of people in a mathecamp. By default this includes BUS, PRIVATE and SELF.
+    """
+
+    def __init__(self, name):
+        self.name = name
+
     @classmethod
     def fromString(cls, string):
-        conversion = {
-            "TransportType.BUS": TransportType.BUS,
-            "TransportType.PRIVATE": TransportType.PRIVATE,
-            "TransportType.SELF": TransportType.SELF
-        }
-        return (conversion[string])
-    
+        if string.startswith('TransportType.'):
+            return string.split('.')[1]
+        else:
+            raise ValueError("String to parse did not start with 'TransportType.'")
+
     @classmethod
     def parseListString(cls, string):
         result = []
         if string == "[]":
-            return (result)
+            return result
         for entry in string.strip()[1:-1].split(','):
             result.append(TransportType.fromString(entry.strip()))
-        return (result)
-    
+        return result
+
     def __str__(self):
-        return ("TransportType." + self.name.__str__())
-    
+        return "TransportType." + self.name.__str__()
+
     def __repr__(self):
-        return (self.__str__())
+        return self.__str__()
 
 
-class Equipment(Enum):
-    PIANO = 1
-    BLACKBOARD = 2
-    WHITEBOARD = 3
-    CANVAS = 4
-    
+class Equipment:
+    """
+    Class for equipment that can be present in a room at a mathecamp. By default this includes PIANO, BLACKBOARD,
+    WHITEBOARD and CANVAS
+    """
+
+    def __init__(self, name):
+        self.name = name
+
     @classmethod
     def fromString(cls, string):
-        conversion = {
-            "Equipment.PIANO": Equipment.PIANO,
-            "Equipment.BLACKBOARD": Equipment.BLACKBOARD,
-            "Equipment.WHITEBOARD": Equipment.WHITEBOARD,
-            "Equipment.CANVAS": Equipment.CANVAS
-        }
-        return (conversion[string])
-    
+        if string.startswith('Equipment.'):
+            return string.split('.')[1]
+        else:
+            raise ValueError("String to parse did not start with 'Equipment.'")
+
     @classmethod
     def parseListString(cls, string):
         result = []
         if string == "[]":
-            return (result)
+            return result
         for entry in string.strip()[1:-1].split(','):
             result.append(Equipment.fromString(entry.strip()))
-        return (result)
-    
+        return result
+
     def __str__(self):
-        return ("Equipment." + self.name.__str__())
-    
+        return "Equipment." + self.name.__str__()
+
     def __repr__(self):
-        return (self.__str__())
+        return self.__str__()
+
+
+class Penalty:
+    """
+    Class for penalties that can be given to participants at a mathecamp. By default this includes GARBAGE_SEPARATION
+    and TABLE_WIPING
+    """
+
+    def __init__(self, name):
+        self.name = name
+
+    @classmethod
+    def fromString(cls, string):
+        if string.startswith('Penalty.'):
+            return string.split('.')[1]
+        else:
+            raise ValueError("String to parse did not start with 'Penalty.'")
+
+    @classmethod
+    def parseListString(cls, string):
+        result = []
+        if string == "[]":
+            return result
+        for entry in string.strip()[1:-1].split(','):
+            result.append(Penalty.fromString(entry.strip()))
+        return result
+
+    def __str__(self):
+        return "Penalty." + self.name.__str__()
+
+    def __repr__(self):
+        return self.__str__()

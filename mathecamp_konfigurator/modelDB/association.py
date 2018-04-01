@@ -18,44 +18,44 @@
 # You should have received a copy of the GNU General Public License
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
-from mathecamp_konfigurator import db
+from mathecamp_konfigurator import db, Base
 
-curriculum = db.Table('curriculum', db.Base.metadata,
+curriculum = db.Table('curriculum', Base.metadata,
                       db.Column('mathcircle_id', db.Integer, db.ForeignKey('mathcircles.id')),
                       db.Column('topic_id', db.Integer, db.ForeignKey('topics.id')))
 
-teachingMaterials = db.Table('teachingmaterials', db.Base.metadata,
+teachingMaterials = db.Table('teachingmaterials', Base.metadata,
                              db.Column('topic_id', db.Integer, db.ForeignKey('topics.id')),
                              db.Column('equipment_id', db.Integer, db.ForeignKey('equipment.id')))
 
-roomEquipment = db.Table('roomequipment', db.Base.metadata,
+roomEquipment = db.Table('roomequipment', Base.metadata,
                          db.Column('generalroom_id', db.Integer, db.ForeignKey('generalrooms.id')),
                          db.Column('equipment_id', db.Integer, db.ForeignKey('equipment.id')))
 
-interests = db.Table('interests', db.Base.metadata,
+interests = db.Table('interests', Base.metadata,
                      db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
                      db.Column('topic_id', db.Integer, db.ForeignKey('topics.id')))
 
-parentsEmail = db.Table('parentsemail', db.Base.metadata,
+parentsEmail = db.Table('parentsemail', Base.metadata,
                      db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
                      db.Column('emailaddress_id', db.Integer, db.ForeignKey('emailaddresses.id')))
 
-emergencyNumbers = db.Table('emergencynumbers', db.Base.metadata,
+emergencyNumbers = db.Table('emergencynumbers', Base.metadata,
                      db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
                      db.Column('emergencynumber_id', db.Integer, db.ForeignKey('phonenumbers.id')))
 
-musicians = db.Table('musicians', db.Base.metadata,
+musicians = db.Table('musicians', Base.metadata,
                      db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
                      db.Column('instrument_id', db.Integer, db.ForeignKey('instruments.id')))
 
-sickPeople = db.Table('sickpeople', db.Base.metadata,
+sickPeople = db.Table('sickpeople', Base.metadata,
                      db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
                      db.Column('illness_id', db.Integer, db.ForeignKey('illness.id')))
 
-friendships = db.Table('friendships', db.Base.metadata,
+friendships = db.Table('friendships', Base.metadata,
                      db.Column('friend_id', db.Integer, db.ForeignKey('participants.id')),
                      db.Column('islikedfriend_id', db.Integer, db.ForeignKey('participants.id')))
 
-gradePreferences = db.Table('grade', db.Base.metadata,
+gradePreferences = db.Table('grade', Base.metadata,
                      db.Column('counselor_id', db.Integer, db.ForeignKey('counselors.id')),
                      db.Column('grade_id', db.Integer, db.ForeignKey('grades.id')))
