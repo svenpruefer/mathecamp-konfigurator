@@ -32,11 +32,11 @@ def getRoomExample():
 
 def getGeneralRoomExample(nr = 0):
     if nr == 0:
-        return (GeneralRoom("test", [Equipment.PIANO, Equipment.WHITEBOARD]),
-                {"name": "test", "equipment": [Equipment.PIANO, Equipment.WHITEBOARD]})
+        return (GeneralRoom("test", [Equipment("PIANO"), Equipment("WHITEBOARD")]),
+                {"name": "test", "equipment": [Equipment("PIANO"), Equipment("WHITEBOARD")]})
     elif nr == 1:
-        return (GeneralRoom("Scheune", [Equipment.BLACKBOARD]),
-                {"name": "Scheune", "equipment": [Equipment.BLACKBOARD]})
+        return (GeneralRoom("Scheune", [Equipment("BLACKBOARD")]),
+                {"name": "Scheune", "equipment": [Equipment("BLACKBOARD")]})
     else:
         return (GeneralRoom("Mont Blanc", []),
                 {"name": "Mont Blanc", "equipment": []})

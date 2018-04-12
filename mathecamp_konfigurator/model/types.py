@@ -28,6 +28,26 @@ __docformat__ = 'reStructuredText'
 
 from datetime import *
 
+############################
+# Generic Enum Mixin Class #
+############################
+
+
+class EnumMixin(object):
+    """
+    Class to imitate enums of model objects
+    """
+
+    def __eq__(self, other):
+        """Overrides the default implementation"""
+        if isinstance(self, other.__class__):
+            return self.__dict__ == other.__dict__
+        return NotImplemented
+
+    def __hash__(self):
+        """Overrides the default implementation"""
+        return hash(tuple(sorted(self.__dict__.items())))
+
 
 ############
 # Schedule #

@@ -18,6 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
+__docformat__ = 'reStructuredText'
+
 from datetime import datetime
 from mathecamp_konfigurator import db
 
@@ -42,14 +44,14 @@ class Activity(db.Model):
     expense = db.relationship("Expense", back_populates = "activity")
 
     def __repr__(self):
-        return ("Activity({0},{1},{2})".format(self.name, self.time, self.room_id))
+        return "Activity({0},{1},{2})".format(self.name, self.time, self.room_id)
 
     def toDict(self):
-        return ({"name": self.name, "time": self.time, "room_id": self.room_id})
+        return {"name": self.name, "time": self.time, "room_id": self.room_id}
 
     @classmethod
     def fromDict(cls, dictionary):
-        return (Activity(name = dictionary["name"], time = dictionary["time"], room_id = dictionary["room_id"]))
+        return Activity(name = dictionary["name"], time = dictionary["time"], room_id = dictionary["room_id"])
 
     @classmethod
     def fromDictOfStrings(cls, dictionary):

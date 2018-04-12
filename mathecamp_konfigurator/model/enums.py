@@ -18,7 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with mathecamp-configurator.  If not, see <http://www.gnu.org/licenses/>.
 
-"""This file defines enums used in mathecamp-konfigurator"""
+"""This file defines enums in mathecamp-konfigurator by mirroring their SQL counterparts instead of using the enum
+ package. This has the advantage of allowing to add new 'enums' dynamically."""
 
 __docformat__ = 'reStructuredText'
 
@@ -28,23 +29,27 @@ __docformat__ = 'reStructuredText'
 ##########
 
 from enum import Enum
+from mathecamp_konfigurator.model.types import EnumMixin
 
 ##########
 # Gender #
 ##########
 
 
-class Gender(Enum):
-    FEMALE = 1
-    MALE = 2
+class Gender(EnumMixin):
+    """
+    Possible genders in mathecamp_konfigurator.
+    """
+
+    def __init__(self, name):
+        self.name = name
 
     @classmethod
     def fromString(cls, string):
-        conversion = {
-            "Gender.FEMALE": Gender.FEMALE,
-            "Gender.MALE": Gender.MALE
-        }
-        return conversion[string]
+        if string.startswith('Gender.'):
+            return Gender(name=string.split('.')[1])
+        else:
+            raise ValueError("String to parse did not start with 'Gender.'")
 
     @classmethod
     def parseListString(cls, string):
@@ -60,6 +65,7 @@ class Gender(Enum):
 
     def __repr__(self):
         return self.__str__()
+
 
 ##############
 # Occupation #
@@ -80,7 +86,7 @@ class Occupation(Enum):
         conversion = {
             "Occupation.COUNSELOR": Occupation.COUNSELOR,
             "Occupation.PARTICIPANT": Occupation.PARTICIPANT,
-            "Occupation.Guest": Occupation.GUEST
+            "Occupation.GUEST": Occupation.GUEST
         }
         return conversion[string]
 
@@ -104,33 +110,20 @@ class Occupation(Enum):
 #####################
 
 
-class FoodRestriction(Enum):
+class FoodRestriction(EnumMixin):
     """
     Enum for food restrictions of people
     """
 
-    VEGETARIAN = 1
-    VEGAN = 2
-    NO_MEAT = 3
-    NO_FISH = 4
-    CELIAC_DISEASE = 5
-    NO_NUTS = 6
-    NO_EGGS = 7
-    NO_CARROTS = 8
+    def __init__(self, name):
+        self.name = name
 
     @classmethod
     def fromString(cls, string):
-        conversion = {
-            "FoodRestriction.VEGETARIAN": FoodRestriction.VEGETARIAN,
-            "FoodRestriction.VEGAN": FoodRestriction.VEGAN,
-            "FoodRestriction.NO_MEAT": FoodRestriction.NO_MEAT,
-            "FoodRestriction.NO_FISH": FoodRestriction.NO_FISH,
-            "FoodRestriction.CELIAC_DISEASE": FoodRestriction.CELIAC_DISEASE,
-            "FoodRestriction.NO_NUTS": FoodRestriction.NO_NUTS,
-            "FoodRestriction.NO_EGGS": FoodRestriction.NO_EGGS,
-            "FoodRestriction.NO_CARROTS": FoodRestriction.NO_CARROTS
-        }
-        return conversion[string]
+        if string.startswith('FoodRestriction.'):
+            return FoodRestriction(name=string.split('.')[1])
+        else:
+            raise ValueError("String to parse did not start with 'FoodRestriction.'")
 
     @classmethod
     def parseListString(cls, string):
@@ -153,23 +146,20 @@ class FoodRestriction(Enum):
 ###################
 
 
-class TransportType(Enum):
+class TransportType(EnumMixin):
     """
     Enum for various possibilities of how people can arrive at or leave from the Mathecamp
     """
 
-    BUS = 1
-    PRIVATE = 2
-    SELF = 3
+    def __init__(self, name):
+        self.name = name
 
     @classmethod
     def fromString(cls, string):
-        conversion = {
-            "TransportType.BUS": TransportType.BUS,
-            "TransportType.PRIVATE": TransportType.PRIVATE,
-            "TransportType.SELF": TransportType.SELF
-        }
-        return conversion[string]
+        if string.startswith('TransportType.'):
+            return TransportType(name=string.split('.')[1])
+        else:
+            raise ValueError("String to parse did not start with 'TransportType.'")
 
     @classmethod
     def parseListString(cls, string):
@@ -191,25 +181,20 @@ class TransportType(Enum):
 #############
 
 
-class Equipment(Enum):
+class Equipment(EnumMixin):
     """
     Enum for possible equipment that can be in a room
     """
 
-    PIANO = 1
-    BLACKBOARD = 2
-    WHITEBOARD = 3
-    CANVAS = 4
+    def __init__(self, name):
+        self.name = name
 
     @classmethod
     def fromString(cls, string):
-        conversion = {
-            "Equipment.PIANO": Equipment.PIANO,
-            "Equipment.BLACKBOARD": Equipment.BLACKBOARD,
-            "Equipment.WHITEBOARD": Equipment.WHITEBOARD,
-            "Equipment.CANVAS": Equipment.CANVAS
-        }
-        return conversion[string]
+        if string.startswith('Equipment.'):
+            return Equipment(name=string.split('.')[1])
+        else:
+            raise ValueError("String to parse did not start with 'Equipment.'")
 
     @classmethod
     def parseListString(cls, string):

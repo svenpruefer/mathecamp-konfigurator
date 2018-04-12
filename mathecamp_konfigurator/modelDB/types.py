@@ -30,17 +30,18 @@ from mathecamp_konfigurator import db
 # EmailAddresses #
 ##################
 
+
 class EmailAddress(db.Model):
     """
     This is an email address
     """
-    
+
     __tablename__ = 'emailAddresses'
-    
+
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
+
     email = db.Column(db.String(128))
-    
+
     def __repr__(self):
         return ("EmailAddress({0})".format(self.email))
 
@@ -59,97 +60,40 @@ class EmailAddress(db.Model):
 # PhoneNumbers #
 ################
 
+
 class PhoneNumber(db.Model):
     """
     This is a phone number
     """
-    
+
     __tablename__ = 'phonenumbers'
-    
+
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
+
     number = db.Column(db.String(128))
-    
+
     owner = db.Column(db.String(128), nullable = True, default = None)
-    
+
     def __repr__(self):
         if (self.owner == None):
             result = "PhoneNumber({0})".format(self.number)
         else:
             result = "PhoneNumber({0},{1})".format(self.number, self.owner)
         return (result)
-    
+
     def toDict(self):
         return ({"number": self.number, "owner": self.owner})
-    
+
     @classmethod
     def fromDict(cls, dictionary):
         return (PhoneNumber(number = dictionary["number"], owner = dictionary["owner"]))
-    
+
     @classmethod
     def fromDictOfStrings(cls, dictionary):
         return (PhoneNumber(number = dictionary["number"],
                              owner = dictionary["owner"]))
 
 
-####################
-# FoodRestrictions #
-####################
-
-class FoodRestriction(db.Model):
-    """
-    This is a food restriction
-    """
-    
-    __tablename__ = 'foodrestrictions'
-    
-    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
-    name = db.Column(db.String(128))
-    
-    def __repr__(self):
-        return("FoodRestriction({0})".format(self.name))
-    
-    def toDict(self):
-        return ({"name": self.name})
-    
-    @classmethod
-    def fromDict(cls, dictionary):
-        return (FoodRestriction(name = dictionary["name"]))
-    
-    @classmethod
-    def fromDictOfStrings(cls, dictionary):
-        return (FoodRestriction(name = dictionary["name"]))
-
-
-#############
-# Equipment #
-#############
-
-class Equipment(db.Model):
-    """
-    This is equipment
-    """
-    
-    __tablename__ = 'equipment'
-    
-    id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
-    name = db.Column(db.String(128))
-    
-    def __repr__(self):
-        return ("Equipment({0})".format(self.name))
-    
-    def toDict(self):
-        return ({"name": self.name})
-    
-    @classmethod
-    def fromDict(cls, dictionary):
-        return (Equipment(name = dictionary["name"]))
-    
-    @classmethod
-    def fromDictOfStrings(cls, dictionary):
-        return (Equipment(name = dictionary["name"]))
 
 
 ##############
@@ -160,23 +104,23 @@ class Instrument(db.Model):
     """
     This is an instrument
     """
-    
+
     __tablename__ = 'instruments'
-    
+
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
+
     name = db.Column(db.String(128))
-    
+
     def __repr__(self):
         return ("Instrument({0})".format(self.name))
-    
+
     def toDict(self):
         return ({"name": self.name})
-    
+
     @classmethod
     def fromDict(cls, dictionary):
         return (Instrument(name = dictionary["name"]))
-    
+
     @classmethod
     def fromDictOfStrings(cls, dictionary):
         return (Instrument(name = dictionary["name"]))
@@ -188,25 +132,25 @@ class Instrument(db.Model):
 
 class Illness(db.Model):
     """
-    This class represents deseases, illnesses and medication
+    This class represents diseases, illnesses and medication
     """
-    
+
     __tablename__ = 'illness'
-    
+
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
+
     name = db.Column(db.String(128))
-    
+
     def __repr__(self):
         return ("Illness({0})".format(self.name))
-    
+
     def toDict(self):
         return ({"name": self.name})
-    
+
     @classmethod
     def fromDict(cls, dictionary):
         return (Illness(name = dictionary["name"]))
-    
+
     @classmethod
     def fromDictOfStrings(cls, dictionary):
         return (Illness(name = dictionary["name"]))
@@ -219,23 +163,23 @@ class Grade(db.Model):
     """
     This class represents grades
     """
-    
+
     __tablename__ = 'grades'
-    
+
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    
+
     grade = db.Column(db.Integer)
-    
+
     def __repr__(self):
         return ("Grade({0})".format(self.grade))
-    
+
     def toDict(self):
         return ({"grade": self.grade})
-    
+
     @classmethod
     def fromDict(cls, dictionary):
         return (Grade(grade = dictionary["grade"]))
-    
+
     @classmethod
     def fromDictOfStrings(cls, dictionary):
         return (Grade(grade = dictionary["grade"]))

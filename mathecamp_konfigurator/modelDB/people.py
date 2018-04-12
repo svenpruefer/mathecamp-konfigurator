@@ -20,14 +20,15 @@
 
 """This file defines all people related types."""
 
+__docformat__ = 'reStructuredText'
+
 ##########
 # Import #
 ##########
 
-from mathecamp_konfigurator.modelDB.association import interests, parentsEmail, emergencyNumbers, musicians, sickPeople
+from mathecamp_konfigurator.modelDB.association import interests, parentsEmail, musicians, sickPeople
 from mathecamp_konfigurator.modelDB.association import friendships, gradePreferences
 from mathecamp_konfigurator import db
-from mathecamp_konfigurator.modelDB.enums import Gender, TransportType
 
 #########
 # Human #
@@ -49,11 +50,12 @@ class Human(db.Model):
 
     birthDate = db.Column(db.DateTime)
 
-    gender = db.Column(db.Enum(Gender))
+    gender_id = db.Column(db.Integer, db.ForeignKey('gender.id'))
+    gender = db.relationship("Gender")
 
-    emailAddresses = db.relationship("EmailAddress")
+    emailAddresses = db.relationship("EmailAddress", secondary='humanemail')
 
-    phoneNumbers = db.relationship("PhoneNumber")
+    phoneNumbers = db.relationship("PhoneNumber", secondary='humanphonenumbers')
 
     street = db.Column(db.String)
 
@@ -65,13 +67,15 @@ class Human(db.Model):
 
     arrivalTime = db.Column(db.DateTime)
 
-    arrivalType = db.Column(db.Enum(TransportType))
+    arrivalType_id = db.Column(db.Integer, db.ForeignKey('transporttypes.id'))
+    arrivalType = db.relationship("TransportType")
 
     departureTime = db.Column(db.DateTime)
 
-    departureType = db.Column(db.Enum(TransportType))
+    departureType_id = db.Column(db.Integer, db.ForeignKey('transporttypes.id'))
+    departureType = db.relationship("TransportType")
 
-    foodRestrictions = db.relationship("FoodRestriction")
+    foodRestrictions = db.relationship("FoodRestriction", secondary='intolerances')
 
     miscellaneous = db.Column(db.String)
 
@@ -97,7 +101,7 @@ class Participant(db.Model):
 
     campPrice = db.Column(db.Float)
 
-    moneyPayedAlread = db.Column(db.Boolean)
+    moneyPayedAlready = db.Column(db.Boolean)
 
     mathCircle_id = db.Column(db.Integer, db.ForeignKey('mathcircles.id'))
     mathCircle = db.relationship("MathCircle")
@@ -108,7 +112,7 @@ class Participant(db.Model):
 
     emailAddressesParents = db.relationship("EmailAddress", secondary = parentsEmail)
 
-    phoneNumbersEmergency = db.relationship("PhoneNumber", secondary = emergencyNumbers)
+    phoneNumbersEmergency = db.relationship("EmergencyNumbers")
 
     picture = db.Column(db.LargeBinary)
 

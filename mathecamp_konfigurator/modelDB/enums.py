@@ -23,30 +23,28 @@
 
 __docformat__ = 'reStructuredText'
 
+###########
+# Imports #
+###########
 
-class Gender:
+from mathecamp_konfigurator import db
+from mathecamp_konfigurator.model.types import EnumMixin
+
+##########
+# Gender #
+##########
+
+
+class Gender(EnumMixin, db.Model):
     """
-    Possible genders in mathecamp_konfigurator.
+    Possible genders in mathecamp_konfigurator
     """
 
-    def __init__(self, name):
-        self.name = name
+    __tablename__ = 'gender'
 
-    @classmethod
-    def fromString(cls, string):
-        if string.startswith('Gender.'):
-            return string.split('.')[1]
-        else:
-            raise ValueError("String to parse did not start with 'Gender.'")
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    @classmethod
-    def parseListString(cls, string):
-        result = []
-        if string == "[]":
-            return result
-        for entry in string.strip()[1:-1].split(','):
-            result.append(Gender.fromString(entry.strip()))
-        return result
+    name = db.Column(db.String, unique=True)
 
     def __str__(self):
         return "Gender." + self.name.__str__()
@@ -55,61 +53,21 @@ class Gender:
         return self.__str__()
 
 
-class FoodRestriction:
-    """
-    Possible food restrictions in a mathecamp. By default includes VEGETARIAN, VEGAN, NO_MEAT, NO_FISH, CELIAC_DISEASE,
-    NO_NUTS, NO_EGGS, NO_CARROTS
-    """
-
-    def __init__(self, name):
-        self.name =name
-
-    @classmethod
-    def fromString(cls, string):
-        if string.startswith('FoodRestriction.'):
-            return string.split('.')[1]
-        else:
-            raise ValueError("String to parse did not start with 'FoodRestriction.'")
-
-    @classmethod
-    def parseListString(cls, string):
-        result = []
-        if string == "[]":
-            return result
-        for entry in string.strip()[1:-1].split(','):
-            result.append(FoodRestriction.fromString(entry.strip()))
-        return result
-
-    def __str__(self):
-        return "FoodRestriction." + self.name.__str__()
-
-    def __repr__(self):
-        return self.__str__()
+###################
+# Transport Types #
+###################
 
 
-class TransportType:
+class TransportType(EnumMixin, db.Model):
     """
     Class for types of transport of people in a mathecamp. By default this includes BUS, PRIVATE and SELF.
     """
 
-    def __init__(self, name):
-        self.name = name
+    __tablename__ = 'transporttypes'
 
-    @classmethod
-    def fromString(cls, string):
-        if string.startswith('TransportType.'):
-            return string.split('.')[1]
-        else:
-            raise ValueError("String to parse did not start with 'TransportType.'")
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    @classmethod
-    def parseListString(cls, string):
-        result = []
-        if string == "[]":
-            return result
-        for entry in string.strip()[1:-1].split(','):
-            result.append(TransportType.fromString(entry.strip()))
-        return result
+    name = db.Column(db.String, unique=True)
 
     def __str__(self):
         return "TransportType." + self.name.__str__()
@@ -118,65 +76,73 @@ class TransportType:
         return self.__str__()
 
 
-class Equipment:
-    """
-    Class for equipment that can be present in a room at a mathecamp. By default this includes PIANO, BLACKBOARD,
-    WHITEBOARD and CANVAS
-    """
-
-    def __init__(self, name):
-        self.name = name
-
-    @classmethod
-    def fromString(cls, string):
-        if string.startswith('Equipment.'):
-            return string.split('.')[1]
-        else:
-            raise ValueError("String to parse did not start with 'Equipment.'")
-
-    @classmethod
-    def parseListString(cls, string):
-        result = []
-        if string == "[]":
-            return result
-        for entry in string.strip()[1:-1].split(','):
-            result.append(Equipment.fromString(entry.strip()))
-        return result
-
-    def __str__(self):
-        return "Equipment." + self.name.__str__()
-
-    def __repr__(self):
-        return self.__str__()
+#############
+# Penalties #
+#############
 
 
-class Penalty:
+class Penalty(EnumMixin, db.Model):
     """
     Class for penalties that can be given to participants at a mathecamp. By default this includes GARBAGE_SEPARATION
     and TABLE_WIPING
     """
 
-    def __init__(self, name):
-        self.name = name
+    __tablename__ = 'penalties'
 
-    @classmethod
-    def fromString(cls, string):
-        if string.startswith('Penalty.'):
-            return string.split('.')[1]
-        else:
-            raise ValueError("String to parse did not start with 'Penalty.'")
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
 
-    @classmethod
-    def parseListString(cls, string):
-        result = []
-        if string == "[]":
-            return result
-        for entry in string.strip()[1:-1].split(','):
-            result.append(Penalty.fromString(entry.strip()))
-        return result
+    name = db.Column(db.String, unique=True)
 
     def __str__(self):
         return "Penalty." + self.name.__str__()
+
+    def __repr__(self):
+        return self.__str__()
+
+
+####################
+# FoodRestrictions #
+####################
+
+
+class FoodRestriction(EnumMixin, db.Model):
+    """
+    Possible food restrictions in a mathecamp. By default includes VEGETARIAN, VEGAN, NO_MEAT, NO_FISH, CELIAC_DISEASE,
+    NO_NUTS, NO_EGGS, NO_CARROTS
+    """
+
+    __tablename__ = 'foodrestrictions'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    name = db.Column(db.String)
+
+    def __str__(self):
+        return "FoodRestriction.{0}".format(self.name)
+
+    def __repr__(self):
+        return self.__str__()
+
+
+#############
+# Equipment #
+#############
+
+
+class Equipment(EnumMixin, db.Model):
+    """
+    Class for equipment that can be present in a room at a mathecamp. By default this includes PIANO, BLACKBOARD,
+    WHITEBOARD and CANVAS
+    """
+
+    __tablename__ = 'equipment'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
+    name = db.Column(db.String)
+
+    def __str__(self):
+        return "Equipment.{0}".format(self.name)
 
     def __repr__(self):
         return self.__str__()

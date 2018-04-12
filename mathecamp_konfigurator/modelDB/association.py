@@ -37,25 +37,44 @@ interests = db.Table('interests', Base.metadata,
                      db.Column('topic_id', db.Integer, db.ForeignKey('topics.id')))
 
 parentsEmail = db.Table('parentsemail', Base.metadata,
-                     db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
-                     db.Column('emailaddress_id', db.Integer, db.ForeignKey('emailaddresses.id')))
+                        db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
+                        db.Column('emailaddress_id', db.Integer, db.ForeignKey('emailaddresses.id')))
 
-emergencyNumbers = db.Table('emergencynumbers', Base.metadata,
-                     db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
-                     db.Column('emergencynumber_id', db.Integer, db.ForeignKey('phonenumbers.id')))
+humanEmail = db.Table('humanemail', Base.metadata,
+                      db.Column('human_id', db.Integer, db.ForeignKey('humans.id')),
+                      db.Column('emailaddress_id', db.Integer, db.ForeignKey('emailaddresses.id')))
+
+humanPhoneNumbers = db.Table('humanphonenumbers', Base.metadata,
+                             db.Column('human_id', db.Integer, db.ForeignKey('humans.id')),
+                             db.Column('phonenumber_id', db.Integer, db.ForeignKey('phonenumbers.id')))
+
+intolerances = db.Table('intolerances', Base.metadata,
+                        db.Column('human_id', db.Integer, db.ForeignKey('humans.id')),
+                        db.Column('foodrestriction_id', db.Integer, db.ForeignKey('foodrestrictions.id')))
+
+
+class EmergencyNumbers(db.Model):
+    __tablename__ = 'emergencynumbers'
+
+    participant_id = db.Column(db.Integer, db.ForeignKey('participants.id'), primary_key=True)
+    emergencynumber_id = db.Column(db.Integer, db.ForeignKey('phonenumbers.id'), primary_key=True)
+    name = db.Column(db.String)
+
+    emergencynumber = db.relationship("PhoneNumber")
+
 
 musicians = db.Table('musicians', Base.metadata,
                      db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
                      db.Column('instrument_id', db.Integer, db.ForeignKey('instruments.id')))
 
 sickPeople = db.Table('sickpeople', Base.metadata,
-                     db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
-                     db.Column('illness_id', db.Integer, db.ForeignKey('illness.id')))
+                      db.Column('participant_id', db.Integer, db.ForeignKey('participants.id')),
+                      db.Column('illness_id', db.Integer, db.ForeignKey('illness.id')))
 
 friendships = db.Table('friendships', Base.metadata,
-                     db.Column('friend_id', db.Integer, db.ForeignKey('participants.id')),
-                     db.Column('islikedfriend_id', db.Integer, db.ForeignKey('participants.id')))
+                       db.Column('friend_id', db.Integer, db.ForeignKey('participants.id')),
+                       db.Column('islikedfriend_id', db.Integer, db.ForeignKey('participants.id')))
 
 gradePreferences = db.Table('grade', Base.metadata,
-                     db.Column('counselor_id', db.Integer, db.ForeignKey('counselors.id')),
-                     db.Column('grade_id', db.Integer, db.ForeignKey('grades.id')))
+                            db.Column('counselor_id', db.Integer, db.ForeignKey('counselors.id')),
+                            db.Column('grade_id', db.Integer, db.ForeignKey('grades.id')))
