@@ -29,4 +29,4 @@ python:
 - 3.4
 script: tox
 env:
-- MATHECAMP_KONFIGURATOR_SETTINGS="../config.py"
+- MATHECAMP_KONFIGURATOR_SETTINGS=../config.py
