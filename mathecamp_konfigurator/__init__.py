@@ -38,7 +38,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__, instance_relative_config=True)
 
 app.config.from_object(Config)
-app.config.from_envvar('MATHECAMP_KONFIGURATOR_SETTINGS')
+app.config.from_envvar('MATHECAMP_KONFIGURATOR_SETTINGS', silent=True)
 
 Bootstrap(app)
 DebugToolbarExtension(app)
