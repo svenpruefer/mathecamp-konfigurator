@@ -21,7 +21,7 @@
 """Top-level package for mathecamp-konfigurator."""
 from sqlalchemy.ext.declarative import declarative_base
 
-__author__ = """Sven Pruefer"""
+__author__ = """Sven Prüfer"""
 __email__ = 'pruefer.sven@gmail.com'
 __version__ = '0.1.0'
 
@@ -38,7 +38,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__, instance_relative_config=True)
 
 app.config.from_object(Config)
-app.config.from_pyfile('config.py')
+app.config.from_envvar('MATHECAMP_KONFIGURATOR_SETTINGS')
 
 Bootstrap(app)
 DebugToolbarExtension(app)
@@ -58,6 +58,7 @@ from mathecamp_konfigurator.modelDB.types import *
 app.register_blueprint(overview, url_prefix='/overview/')
 app.register_blueprint(about, url_prefix='/about/')
 app.register_blueprint(camp)
+
 
 def init_db():
     db.create_all()
