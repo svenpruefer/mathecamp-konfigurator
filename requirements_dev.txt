@@ -11,5 +11,5 @@ PyYAML==3.12
 pytest==3.5.1
 pytest-runner==4.2
 python-dateutil==2.7.2
-sortedcontainers==1.5.10
+sortedcontainers==2.0.3
 flask==1.0.1
