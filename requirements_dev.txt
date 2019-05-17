@@ -12,4 +12,4 @@ pytest==3.5.1
 pytest-runner==4.2
 python-dateutil==2.7.2
 sortedcontainers==1.5.10
-flask==1.0.1
+flask==1.0.3
