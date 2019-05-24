@@ -9,7 +9,7 @@ coverage==4.5.1
 cryptography==2.2.2
 PyYAML==3.12
 pytest==3.5.1
-pytest-runner==4.2
+pytest-runner==5.1
 python-dateutil==2.7.2
 sortedcontainers==1.5.10
 flask==1.0.1
